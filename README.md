@@ -249,18 +249,20 @@ transition: slide
 ---
 
 ## Architettura del Motore Grafico
-### Perché libGDX e Integrazione con Scene2D
+### Perché libGDX e Scene2D
 
 <p>
-    Fin dall'inizio abbiamo deciso di affidarci a un <b>framework dedicato al rendering 2D</b> piuttosto che a una libreria UI generica. libGDX lavora <b>a metà strada tra l'alto e il basso livello</b>: ci dà accesso diretto a <code>SpriteBatch</code>, texture, camera ortografica e al game loop (<code>render(delta)</code>), restando un sottile strato sopra OpenGL. Questo ci ha permesso di controllare in modo esplicito <b>cosa, dove e in che ordine</b> viene disegnato ogni frame — esattamente ciò che serve a un simulatore a griglia con sprite stratificati. Io avevo già esperienza con <b>SDL2 in C/C++</b>, di filosofia molto simile, quindi mi sono occupato io del setup del motore grafico.
+Abbiamo scelto <b>libGDX</b> perché è pensato per il rendering 2D continuo, non per UI desktop tradizionali. Offre controllo diretto su <code>SpriteBatch</code>, texture, camera ortografica e game loop (<code>render(delta)</code>), permettendoci di decidere <b>cosa disegnare, dove e in quale ordine</b> a ogni frame.
 </p>
 
 <div class="important-box">
-<p style="margin: 0 !important; font-size: 21px !important;"><b>Perché non JavaFX o Swing?</b> Sono toolkit pensati per <b>applicazioni desktop con widget</b>, non propriamente per giochi: niente game loop nativo, niente batching delle sprite né integrazione OpenGL pronta all'uso. Avrebbero reso scomodo il rendering continuo a 60 FPS della mappa, lo zoom pixel-perfect e il disegno per-frame degli sprite. libGDX è invece costruito attorno a questo caso d'uso.</p>
+<p style="margin: 0 !important; font-size: 21px !important;">
+<b>Perché non JavaFX o Swing?</b> Sono toolkit per applicazioni a widget: non hanno game loop nativo, batching delle sprite o integrazione OpenGL pronta all’uso. libGDX è più adatto a rendering 60 FPS, zoom pixel-perfect e sprite stratificati.
+</p>
 </div>
 
 <p style="font-size: 22px !important;">
-    Sopra il rendering grezzo, per tutta la <b>UI in-game</b> usiamo <b>Scene2D</b> (il modulo UI di libGDX): uno <code>Stage</code> fa da radice della scena e da router degli input, mentre pannelli come HUD, Build Menu e Market estendono <code>Table</code> per disporre <code>Actor</code> (Label, Image, TextButton) con un layout a griglia dichiarativo, senza calcolare coordinate a mano.
+Per la <b>UI in-game</b> usiamo <b>Scene2D</b>: uno <code>Stage</code> gestisce scena e input, mentre HUD, Build Menu e Market estendono <code>Table</code> per disporre <code>Actor</code> come Label, Image e TextButton senza calcolare coordinate manualmente.
 </p>
 
 ---
@@ -271,26 +273,30 @@ transition: slide
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
 <div>
 <p>
-    Tutti gli asset di gioco sono <b>singoli file PNG pre-tagliati</b> (un file per chiave: tile, edifici, feature naturali, icone). Al caricamento, il <code>SpriteSheetRegionRegistry</code> apre ogni file come <code>Texture</code>, vi applica <code>TextureFilter.Nearest</code> per mantenere il <b>pixel art nitido</b> in fase di zoom, e lo espone come <code>TextureRegion</code> tramite il <code>GameAssetManager</code>.
+Gli asset sono <b>PNG singoli già tagliati</b>, uno per ogni chiave: tile, edifici, feature naturali e icone. Il <code>SpriteSheetRegionRegistry</code> li carica come <code>Texture</code>, applica <code>TextureFilter.Nearest</code> per preservare il <b>pixel art nitido</b> e li espone come <code>TextureRegion</code> tramite il <code>GameAssetManager</code>.
 </p>
+
 <p style="font-size: 22px !important;">
-    Una chiave mancante non fa crashare il gioco: il manager logga l'errore e restituisce un <code>missing_asset</code> di fallback.
+Se una chiave manca, il gioco non si blocca: viene loggato l’errore e usato un <code>missing_asset</code> di fallback.
 </p>
 </div>
+
 <div>
 <div class="important-box">
-<p style="margin: 0 !important; font-size: 20px !important;"><b>Pipeline di rendering per frame</b></p>
+<p style="margin: 0 !important; font-size: 20px !important;"><b>Pipeline di rendering</b></p>
 <p style="font-size: 18px !important; margin: 8px 0 0 0 !important;">
-    Il <code>WorldRenderer</code> apre un solo <code>SpriteBatch</code> (allineato alla <code>OrthographicCamera</code>) e disegna a strati:
+Il <code>WorldRenderer</code> usa un solo <code>SpriteBatch</code>, sincronizzato con la <code>OrthographicCamera</code>, e disegna la scena a livelli:
 </p>
 <ol style="font-size: 18px !important;">
-    <li>Tiles del terreno</li>
+    <li>Terreno</li>
     <li>Bordi di foresta</li>
     <li>Feature naturali</li>
-    <li>Edifici (+ anteprima di costruzione)</li>
+    <li>Edifici e anteprima costruzione</li>
     <li>Animazioni</li>
 </ol>
-<p style="font-size: 17px !important; margin: 0 !important;">La griglia di selezione è sovrapposta come overlay finale.</p>
+<p style="font-size: 17px !important; margin: 0 !important;">
+La griglia di selezione viene disegnata come overlay finale.
+</p>
 </div>
 </div>
 </div>
@@ -301,15 +307,17 @@ transition: slide
 ### Disaccoppiamento tra Logica e Rendering
 
 <p>
-    La scelta architetturale più importante del motore grafico è che <b>il rendering non conosce il dominio</b>. La logica di gioco non espone i suoi oggetti interni: a ogni tick produce un <code>VillageSnapshot</code> <b>immutabile</b>, una fotografia di sola lettura dello stato. Il <code>WorldRenderer</code> riceve quello snapshot e disegna, senza mai toccare né modificare il modello.
+La scelta chiave è che <b>il renderer non conosce il dominio</b>. La logica di gioco produce a ogni tick un <code>VillageSnapshot</code> <b>immutabile</b>, cioè una fotografia di sola lettura dello stato. Il <code>WorldRenderer</code> riceve lo snapshot e disegna, senza modificare il modello.
 </p>
 
 <div class="important-box">
-<p style="margin: 0 !important; font-size: 21px !important;"><b>Vantaggi della separazione:</b> la coppia Logica (Edoardo, Mario) e la coppia Grafica (io, Antonio) hanno potuto lavorare <b>in parallelo</b> contro un contratto stabile — lo snapshot. Il motore grafico è sostituibile e testabile in isolamento, e non esiste accoppiamento bidirezionale tra le due metà del progetto.</p>
+<p style="margin: 0 !important; font-size: 21px !important;">
+<b>Vantaggio principale:</b> logica e grafica hanno potuto lavorare <b>in parallelo</b> su un contratto stabile. Il motore grafico resta sostituibile, testabile e senza accoppiamento bidirezionale con il modello.
+</p>
 </div>
 
 <p style="font-size: 22px !important;">
-    Il ponte tra i due mondi è l'<b>Adapter</b> (<code>SnapshotToRenderModelAdapter</code>), che traduce ogni cella dello snapshot in un <code>CellRenderModel</code> pronto per il disegno. La risoluzione degli sprite passa invece per dei <b>Registry</b> dedicati (<code>BuildingSpriteRegistry</code>, <code>TileSpriteRegistry</code>, …): ognuno mappa un <b>enum di dominio</b> (es. <code>BuildingType</code>) sulla chiave testuale dell'asset, isolando in un solo punto la corrispondenza «entità ➔ immagine» e restituendo un <code>missing_asset</code> di fallback quando una chiave non esiste.
+Il collegamento è gestito dall’<b>Adapter</b> (<code>SnapshotToRenderModelAdapter</code>), che converte ogni cella in un <code>CellRenderModel</code>. I <b>Registry</b> dedicati (<code>BuildingSpriteRegistry</code>, <code>TileSpriteRegistry</code>, …) mappano gli enum di dominio alle chiavi degli asset, centralizzando la corrispondenza <b>entità ➔ immagine</b> e gestendo i fallback.
 </p>
 
 ---
