@@ -184,17 +184,94 @@ transition: slide
 ---
 
 ## Architettura del Motore Grafico
-### Implementazione con libGDX e Gestione Asset
+### Perché libGDX e Integrazione con Scene2D
 
-<div class="todo-box">
-    <div class="todo-title">SLIDE DA COMPLETARE — REQUISITO PER: LUCA FEGGI & ANTONIO SABOANU</div>
-    <p><b>Indicazioni per lo sviluppo della slide:</b></p>
-    <ul>
-        <li>Spiegare l'integrazione con il framework <b>libGDX</b> e l'uso dei componenti Scene2D (Stage, Table, Actors).</li>
-        <li>Illustrare il sistema di caricamento e renderizzazione delle <b>Textures</b> e degli <b>Sprites 2D</b> della mappa di gioco.</li>
-        <li><b>Focus Tecnico (Luca & Antonio):</b> Analizzare nel dettaglio il problema riscontrato con gli sfondi bianchi degli asset grafici e spiegare la soluzione adottata per ripulire i canali alpha o ottimizzare i file sorgente.</li>
-    </ul>
+<div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px; align-items: center;">
+<div>
+<p>
+    Per il rendering avevamo bisogno di un framework <b>2D maturo, multipiattaforma e basato su OpenGL</b>. La scelta è ricaduta su <b>libGDX</b>: io (Luca) avevo già esperienza con <b>SDL2 in C/C++</b>, e libGDX ne ricalca da vicino la filosofia (game loop, batching delle draw call, gestione esplicita di texture e camera). Questa familiarità mi ha permesso di guidare il setup del motore grafico riusando concetti che già conoscevo, traducendoli nell'ecosistema Java.
+</p>
 </div>
+<div>
+<div class="important-box">
+<p style="margin: 0 !important; font-size: 20px !important;"><b>SDL2 ➔ libGDX</b></p>
+<ul style="font-size: 18px !important;">
+    <li><code>SDL_Renderer</code> ➔ <code>SpriteBatch</code></li>
+    <li><code>SDL_Texture</code> ➔ <code>Texture</code> / <code>TextureRegion</code></li>
+    <li>Game loop manuale ➔ <code>render(delta)</code></li>
+    <li>Blit + viewport ➔ <code>OrthographicCamera</code></li>
+</ul>
+</div>
+</div>
+</div>
+
+<p style="font-size: 22px !important;">
+    Sopra il rendering grezzo, per tutta la <b>UI in-game</b> usiamo <b>Scene2D</b>: uno <code>Stage</code> fa da radice della scena e da router degli input, mentre pannelli come HUD, Build Menu e Market estendono <code>Table</code> per disporre <code>Actor</code> (Label, Image, TextButton) con un layout a griglia dichiarativo, senza calcolare coordinate a mano.
+</p>
+
+---
+
+## Architettura del Motore Grafico
+### Caricamento e Rendering della Mappa 2D
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+<div>
+<p>
+    Tutti gli asset di gioco sono <b>singoli file PNG pre-tagliati</b> (un file per chiave: tile, edifici, feature naturali, icone). Al caricamento, il <code>SpriteSheetRegionRegistry</code> apre ogni file come <code>Texture</code>, vi applica <code>TextureFilter.Nearest</code> per mantenere il <b>pixel art nitido</b> in fase di zoom, e lo espone come <code>TextureRegion</code> tramite il <code>GameAssetManager</code>.
+</p>
+<p style="font-size: 22px !important;">
+    Una chiave mancante non fa crashare il gioco: il manager logga l'errore e restituisce un <code>missing_asset</code> di fallback.
+</p>
+</div>
+<div>
+<div class="important-box">
+<p style="margin: 0 !important; font-size: 20px !important;"><b>Pipeline di rendering per frame</b></p>
+<p style="font-size: 18px !important; margin: 8px 0 0 0 !important;">
+    Il <code>WorldRenderer</code> apre un solo <code>SpriteBatch</code> (allineato alla <code>OrthographicCamera</code>) e disegna a strati:
+</p>
+<ol style="font-size: 18px !important;">
+    <li>Tiles del terreno</li>
+    <li>Bordi di foresta</li>
+    <li>Feature naturali</li>
+    <li>Edifici (+ anteprima di costruzione)</li>
+    <li>Animazioni</li>
+</ol>
+<p style="font-size: 17px !important; margin: 0 !important;">La griglia di selezione è sovrapposta come overlay finale.</p>
+</div>
+</div>
+</div>
+
+---
+
+## Architettura del Motore Grafico
+### Focus Tecnico: il Problema degli Sfondi Bianchi
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+<div>
+<p>
+    Diversi asset sorgente arrivavano con uno <b>sfondo bianco opaco</b> invece di un canale alpha trasparente. Renderizzati con <code>SpriteBatch</code>, producevano un <b>riquadro bianco</b> attorno a ogni sprite, rompendo la sovrapposizione a strati di tile, edifici e feature sulla mappa.
+</p>
+<p style="font-size: 22px !important;">
+    La causa: i PNG erano salvati senza canale alpha (il bianco era un colore reale, non "vuoto"), quindi nessun blending poteva nasconderlo a runtime.
+</p>
+</div>
+<div>
+<div class="important-box">
+<p style="margin: 0 !important;"><b>La soluzione adottata</b></p>
+<p style="font-size: 20px !important; margin: 8px 0 0 0 !important;">
+    Abbiamo scelto di <b>ripulire i file sorgente offline</b> anziché elaborarli a runtime:
+</p>
+<ul style="font-size: 19px !important;">
+    <li>conversione del <b>bianco di sfondo in pixel trasparenti</b> (alpha = 0);</li>
+    <li>ri-esportazione di ogni sprite come PNG <b>RGBA pre-ritagliato</b>, un file per chiave.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<p style="font-size: 22px !important;">
+    Così il motore <b>carica direttamente asset puliti</b>, senza alcun passaggio di pulizia dell'alpha al caricamento: una scelta deliberata per mantenere il codice di rendering semplice e veloce, spostando il costo una sola volta nella preparazione degli asset (<i>«one file per key, no post-processing needed»</i>).
+</p>
 
 ---
 
