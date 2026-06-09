@@ -7,6 +7,71 @@ transition: slide
 ---
 
 <style>
+/* CSS per rendere le tue slide dinamiche e schematiche */
+.reveal h2.ux-title {
+    color: #fca311 !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 40px !important;
+}
+.ux-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 30px;
+}
+.ux-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-top: 4px solid #fca311;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+.ux-card:hover { transform: scale(1.02); }
+.ux-card i {
+    font-size: 40px;
+    color: #fca311;
+    margin-bottom: 15px;
+}
+.ux-card h3 {
+    font-size: 26px !important;
+    color: #fff !important;
+    margin-bottom: 10px;
+}
+.file-box {
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 5px solid #14213d;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.file-name {
+    background: #fca311;
+    color: #000;
+    font-family: monospace;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 20px;
+}
+.file-desc {
+    color: #e5e5e5;
+    font-size: 22px;
+    margin: 0 !important;
+    text-align: left;
+}
+/* Colori tematici per i file */
+.border-blue { border-left-color: #3a86ff !important; }
+.bg-blue { background: #3a86ff !important; color: white !important; }
+.border-green { border-left-color: #38b000 !important; }
+.bg-green { background: #38b000 !important; color: white !important; }
+.border-red { border-left-color: #d90429 !important; }
+.bg-red { background: #d90429 !important; color: white !important; }
+    
 .reveal h1, .reveal h2, .reveal h3 {
     color: #e63946 !important;
     font-family: 'Playfair Display', serif;
@@ -249,15 +314,109 @@ transition: slide
 
 ---
 
-## Interazione Utente & UI Layout
-### Gestione degli Input e Flusso dei Comandi
+# Interazione Utente & UI Layout
 
-<div class="todo-box">
-    <div class="todo-title">SLIDE DA COMPLETARE — REQUISITO PER: ANTONIO SABOANU</div>
-    <p><b>Indicazioni per lo sviluppo della slide:</b></p>
-    <ul>
-        <li>Spiegare l'architettura dell'interfaccia utente in-game (HUD delle risorse, Build Menu strutturato a colonne, Market dinamico).</li>
-        <li>Approfondire il funzionamento del sistema dei comandi (es. InputInputCommandRouter) per passare le azioni del mouse (costruzione, demolizione) dalla UI alla logica senza generare accoppiamento stretto.</li>
-        <li>Mostrare la gestione del pannello delle impostazioni (regolazione dei volumi audio asincrona) e l'integrazione del sistema di alert bicromatico (verde/rosso).</li>
-    </ul>
+
+<h2 class="ux-title">Cos'è la UX nel nostro simulatore?</h2>
+
+<div class="ux-grid">
+    <div class="ux-card" style="border-top-color: #3a86ff;">
+        <i class="fa-solid fa-eye" style="color: #3a86ff;"></i>
+        <h3 style="color: #000000 !important;">Interazione Fluida</h3>
+        <p style="text-align: center; font-size: 20px !important; color: #000000 !important;">Select & Drag, navigazione mappa (Pan/Zoom) e interazione coerente coi bottoni senza conflitti.</p>
+    </div>
+    <div class="ux-card" style="border-top-color: #38b000;">
+        <i class="fa-solid fa-eye" style="color: #38b000;"></i>
+        <h3 style="color: #000000 !important;">Visibilità Contestuale</h3>
+        <p style="text-align: center; font-size: 20px !important; color: #000000 !important;">HUD organizzato a cornice. I menù e i dettagli (es. Market) appaiono solo quando selezioni una struttura.</p>
+    </div>
+    <div class="ux-card" style="border-top-color: #d90429;">
+        <i class="fa-solid fa-bell" style="color: #d90429;"></i>
+        <h3 style="color: #000000 !important;">Alert Significativi</h3>
+        <p style="text-align: center; font-size: 20px !important; color: #000000 !important;">Pop-up cromatici (verde/rosso) e First-Time Warnings per educare il giocatore senza fare spam.</p>
+    </div>
+    <div class="ux-card" style="border-top-color: #9d4edd;">
+        <i class="fa-solid fa-sliders" style="color: #9d4edd;"></i>
+        <h3 style="color: #000000 !important;">Controllo Utente</h3>
+        <p style="text-align: center; font-size: 20px !important; color: #000000 !important;">Menù Impostazioni facilmente accessibile, controllo velocità logica e opzioni di salvataggio veloci.</p>
+    </div>
+</div>
+
+---
+
+<h2 class="ux-title">I File dell'Interazione</h2>
+
+<div class="file-box border-blue">
+    <div class="file-name bg-blue">GameInputProcessor</div>
+    <p class="file-desc" style="color: #ffffff !important;">Ascolta i click "grezzi". Ignora le azioni fuori dalla griglia e impedisce conflitti se l'utente sta cliccando sull'HUD.</p>
+</div>
+
+<div class="file-box border-blue">
+    <div class="file-name bg-blue">CameraController</div>
+    <p class="file-desc" style="color: #ffffff !important;">Gestisce l'esplorazione: permette il "Select and Drag", il pan (WASD) e blocca lo zoom per non rompere la prospettiva.</p>
+</div>
+
+<div class="file-box border-blue">
+    <div class="file-name bg-blue">BuildModeState</div>
+    <p class="file-desc" style="color: #ffffff !important;">La memoria a breve termine della UX: ricorda se stai solo esplorando, se hai in mano un edificio o il martello da demolizione.</p>
+</div>
+
+<div class="file-box border-blue">
+    <div class="file-name bg-blue">InputCommandRouter</div>
+    <p class="file-desc" style="color: #ffffff !important;">Lo "smistatore". Prende il click convertito e decide: ispeziono la cella? Piazzo l'edificio? O cancello tutto?</p>
+</div>
+
+---
+
+<h2 class="ux-title">I File dell'Interfaccia</h2>
+
+<div class="file-box border-green">
+    <div class="file-name bg-green">DashboardHud</div>
+    <p class="file-desc" style="color: #ffffff !important;">La cornice madre. Racchiude BuildMenu, Risorse e parametri ai bordi, lasciando il centro dello schermo libero per giocare.</p>
+</div>
+
+<div class="file-box border-red">
+    <div class="file-name bg-red">WarningPanel & EventModal</div>
+    <p class="file-desc" style="color: #ffffff !important;">Gestiscono i First-Time Warnings (es. quando finisce il cibo) e mostrano gli eventi casuali sfruttando la psicologia dei colori.</p>
+</div>
+
+<div class="file-box border-green">
+    <div class="file-name bg-green">SelectedBuildingPanel</div>
+    <p class="file-desc" style="color: #ffffff !important;">UX contestuale: appare in basso solo quando ispezioni un edificio. Nasconde la complessità finché non la richiedi (es. tasto Trade).</p>
+</div>
+
+<div class="file-box border-green">
+    <div class="file-name bg-green">SettingsModal / Dialogs</div>
+    <p class="file-desc" style="color: #ffffff !important;">Modali in sovraimpressione per mettere in pausa e dare controllo su Salvataggi, Tutorial e regolazione Audio asincrona.</p>
+</div>
+
+---
+
+<h2 class="ux-title">Persistenza: JSON & Memento Pattern</h2>
+<div class="ux-grid">
+    <div class="ux-card" style="border-top-color: #fca311;">
+        <i class="fa fa-floppy-o" style="color: #fca311;"></i>
+        <h3 style="color: #000000 !important;">Memento Pattern</h3>
+        <p style="text-align: center; font-size: 20px !important; color: #000000 !important;">Catturiamo uno "snapshot" istantaneo di tutte le variabili (risorse, edifici, cittadini) senza violare l'incapsulamento.</p>
+    </div>
+    <div class="ux-card" style="border-top-color: #fca311;">
+        <i class="fa fa-file-code-o" style="color: #fca311;"></i>
+        <h3 style="color: #000000 !important;">Formato JSON</h3>
+        <p style="text-align: center; font-size: 20px !important; color: #000000 !important;">Semplice, leggero e leggibile. Permette di debuggare i salvataggi aprendoli come semplici file di testo.</p>
+    </div>
+</div>
+
+<div class="file-box" style="border-left-color: #fca311 !important; margin-top: 30px;">
+    <div class="file-name" style="background: #fca311 !important; color: #000 !important;">VillagePersistenceService</div>
+    <p class="file-desc" style="color: #ffffff !important;">L'orchestratore: gestisce i 5 slot di salvataggio nella cartella utente e coordina l'apertura/chiusura dei file su disco.</p>
+</div>
+
+<div class="file-box" style="border-left-color: #fca311 !important;">
+    <div class="file-name" style="background: #fca311 !important; color: #000 !important;">VillageMapper</div>
+    <p class="file-desc" style="color: #ffffff !important;">Il traduttore: trasforma l'oggetto Java <code>Village</code> in una stringa JSON e viceversa, gestendo anche le versioni del salvataggio.</p>
+</div>
+
+<div class="file-box" style="border-left-color: #fca311 !important;">
+    <div class="file-name" style="background: #fca311 !important; color: #000 !important;">GamePersistenceManager</div>
+    <p class="file-desc" style="color: #ffffff !important;">Il ponte con la UI: permette ai pulsanti "Save" e "Load" del menù di dialogare con il sistema di scrittura senza bloccare il rendering.</p>
 </div>
