@@ -186,27 +186,16 @@ transition: slide
 ## Architettura del Motore Grafico
 ### Perché libGDX e Integrazione con Scene2D
 
-<div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px; align-items: center;">
-<div>
 <p>
-    Per il rendering avevamo bisogno di un framework <b>2D maturo, multipiattaforma e basato su OpenGL</b>. La scelta è ricaduta su <b>libGDX</b>: io (Luca) avevo già esperienza con <b>SDL2 in C/C++</b>, e libGDX ne ricalca da vicino la filosofia (game loop, batching delle draw call, gestione esplicita di texture e camera). Questa familiarità mi ha permesso di guidare il setup del motore grafico riusando concetti che già conoscevo, traducendoli nell'ecosistema Java.
+    Fin dall'inizio abbiamo deciso di affidarci a un <b>framework dedicato al rendering 2D</b> piuttosto che a una libreria UI generica. libGDX lavora <b>a metà strada tra l'alto e il basso livello</b>: ci dà accesso diretto a <code>SpriteBatch</code>, texture, camera ortografica e al game loop (<code>render(delta)</code>), restando un sottile strato sopra OpenGL. Questo ci ha permesso di controllare in modo esplicito <b>cosa, dove e in che ordine</b> viene disegnato ogni frame — esattamente ciò che serve a un simulatore a griglia con sprite stratificati. Io avevo già esperienza con <b>SDL2 in C/C++</b>, di filosofia molto simile, quindi mi sono occupato io del setup del motore grafico.
 </p>
-</div>
-<div>
+
 <div class="important-box">
-<p style="margin: 0 !important; font-size: 20px !important;"><b>SDL2 ➔ libGDX</b></p>
-<ul style="font-size: 18px !important;">
-    <li><code>SDL_Renderer</code> ➔ <code>SpriteBatch</code></li>
-    <li><code>SDL_Texture</code> ➔ <code>Texture</code> / <code>TextureRegion</code></li>
-    <li>Game loop manuale ➔ <code>render(delta)</code></li>
-    <li>Blit + viewport ➔ <code>OrthographicCamera</code></li>
-</ul>
-</div>
-</div>
+<p style="margin: 0 !important; font-size: 21px !important;"><b>Perché non JavaFX o Swing?</b> Sono toolkit pensati per <b>applicazioni desktop con widget</b>, non propriamente per giochi: niente game loop nativo, niente batching delle sprite né integrazione OpenGL pronta all'uso. Avrebbero reso scomodo il rendering continuo a 60 FPS della mappa, lo zoom pixel-perfect e il disegno per-frame degli sprite. libGDX è invece costruito attorno a questo caso d'uso.</p>
 </div>
 
 <p style="font-size: 22px !important;">
-    Sopra il rendering grezzo, per tutta la <b>UI in-game</b> usiamo <b>Scene2D</b>: uno <code>Stage</code> fa da radice della scena e da router degli input, mentre pannelli come HUD, Build Menu e Market estendono <code>Table</code> per disporre <code>Actor</code> (Label, Image, TextButton) con un layout a griglia dichiarativo, senza calcolare coordinate a mano.
+    Sopra il rendering grezzo, per tutta la <b>UI in-game</b> usiamo <b>Scene2D</b> (il modulo UI di libGDX): uno <code>Stage</code> fa da radice della scena e da router degli input, mentre pannelli come HUD, Build Menu e Market estendono <code>Table</code> per disporre <code>Actor</code> (Label, Image, TextButton) con un layout a griglia dichiarativo, senza calcolare coordinate a mano.
 </p>
 
 ---
@@ -244,33 +233,18 @@ transition: slide
 ---
 
 ## Architettura del Motore Grafico
-### Focus Tecnico: il Problema degli Sfondi Bianchi
+### Disaccoppiamento tra Logica e Rendering
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
-<div>
 <p>
-    Diversi asset sorgente arrivavano con uno <b>sfondo bianco opaco</b> invece di un canale alpha trasparente. Renderizzati con <code>SpriteBatch</code>, producevano un <b>riquadro bianco</b> attorno a ogni sprite, rompendo la sovrapposizione a strati di tile, edifici e feature sulla mappa.
+    La scelta architetturale più importante del motore grafico è che <b>il rendering non conosce il dominio</b>. La logica di gioco non espone i suoi oggetti interni: a ogni tick produce un <code>VillageSnapshot</code> <b>immutabile</b>, una fotografia di sola lettura dello stato. Il <code>WorldRenderer</code> riceve quello snapshot e disegna, senza mai toccare né modificare il modello.
 </p>
-<p style="font-size: 22px !important;">
-    La causa: i PNG erano salvati senza canale alpha (il bianco era un colore reale, non "vuoto"), quindi nessun blending poteva nasconderlo a runtime.
-</p>
-</div>
-<div>
+
 <div class="important-box">
-<p style="margin: 0 !important;"><b>La soluzione adottata</b></p>
-<p style="font-size: 20px !important; margin: 8px 0 0 0 !important;">
-    Abbiamo scelto di <b>ripulire i file sorgente offline</b> anziché elaborarli a runtime:
-</p>
-<ul style="font-size: 19px !important;">
-    <li>conversione del <b>bianco di sfondo in pixel trasparenti</b> (alpha = 0);</li>
-    <li>ri-esportazione di ogni sprite come PNG <b>RGBA pre-ritagliato</b>, un file per chiave.</li>
-</ul>
-</div>
-</div>
+<p style="margin: 0 !important; font-size: 21px !important;"><b>Vantaggi della separazione:</b> la coppia Logica (Edoardo, Mario) e la coppia Grafica (io, Antonio) hanno potuto lavorare <b>in parallelo</b> contro un contratto stabile — lo snapshot. Il motore grafico è sostituibile e testabile in isolamento, e non esiste accoppiamento bidirezionale tra le due metà del progetto.</p>
 </div>
 
 <p style="font-size: 22px !important;">
-    Così il motore <b>carica direttamente asset puliti</b>, senza alcun passaggio di pulizia dell'alpha al caricamento: una scelta deliberata per mantenere il codice di rendering semplice e veloce, spostando il costo una sola volta nella preparazione degli asset (<i>«one file per key, no post-processing needed»</i>).
+    Il ponte tra i due mondi è l'<b>Adapter</b> (<code>SnapshotToRenderModelAdapter</code>), che traduce ogni cella dello snapshot in un <code>CellRenderModel</code> pronto per il disegno. La risoluzione degli sprite passa invece per dei <b>Registry</b> dedicati (<code>BuildingSpriteRegistry</code>, <code>TileSpriteRegistry</code>, …): ognuno mappa un <b>enum di dominio</b> (es. <code>BuildingType</code>) sulla chiave testuale dell'asset, isolando in un solo punto la corrispondenza «entità ➔ immagine» e restituendo un <code>missing_asset</code> di fallback quando una chiave non esiste.
 </p>
 
 ---
