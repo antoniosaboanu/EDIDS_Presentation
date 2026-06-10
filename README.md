@@ -476,19 +476,48 @@ transition: slide
 
 ---
 
-## User Stories & JIRA
-### Gestione del Backlog e Task Allocations
+# User Stories e Jira
+### Definizione di Epic e User Stories
 
-<div class="todo-box">
-    <div class="todo-title">SLIDE DA COMPLETARE — REQUISITO PER: MARIO PEPE</div>
-    <p><b>Indicazioni per lo sviluppo della slide:</b></p>
-    <ul>
-        <li>Spiegare come hai strutturato JIRA e l'organizzazione delle User Stories.</li>
-        <li>Dividere le User Stories in <b>macrogruppi logici</b>, ricalcando esattamente l'organizzazione degli Epic/Componenti usata sul software di gestione.</li>
-        <li>Raccontare la gestione pratica dei task: come venivano descritte le storie includendo gli <b>Acceptance Criteria</b>.</li>
-        <li>Spiegare il criterio di assegnazione dei ticket in base alle competenze delle coppie e al bilanciamento del carico di lavoro già assegnato.</li>
-    </ul>
+Dopo aver definito l'ambientazione e le funzionalità principali della simulazione, abbiamo approfondito l'analisi dei requisiti.
+
+Le attività sono state suddivise in **6 Epic**, corrispondenti alle principali aree funzionali del progetto. Assumendo il ruolo di Product Owner, abbiamo designato le **User Stories** necessarie al raggiungimento degli obiettivi di sviluppo.
+
+Per ampliare e validare le idee iniziali, abbiamo utilizzato strumenti di Intelligenza Artificiale (LLM), ottenendo ulteriori proposte che sono state successivamente analizzate e consolidate in un insieme finale di **16 User Stories**, ciascuna associata all'Epic opportuna.
+
+---
+
+# User Stories e Jira
+### Struttura delle User Stories
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: center;">
+
+<div>
+
+Ogni User Story include:
+• Descrizione funzionale
+• Acceptance Criteria
+• Note tecniche e implementative
+• Riferimenti alla documentazione di sviluppo (classi e test realizzati)
 </div>
+    
+<div>
+    <img src="![Image US](https://hackmd.io/_uploads/rJClpGwWGl.png)
+" alt="Code Testing" style="border-radius: 8px; border: 2px solid #8c1c13; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+</div>
+    
+</div>
+
+
+---
+
+# User Stories e Jira
+### Gestione delle User Stories in Jira
+
+Le Epic contenenti le relative User Stories organizzate gerarchicamente, sono contenute nell'**elenco**, in *Jira*.
+
+
+Seguendo un approccio **agile**, in seguito a meeting, attività di testing e verifiche periodiche, le User Stories sono state aggiornate e perfezionate, specialmente negli AC e nelle note tecniche e di implementazione, durante lo svolgersi del progetto.
 
 ---
 
