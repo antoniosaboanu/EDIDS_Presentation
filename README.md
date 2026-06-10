@@ -629,11 +629,6 @@ Seguendo un approccio **agile**, in seguito a meeting, attività di testing e ve
     </div>
 </div>
 
-<div class="gfx-file-box" style="border-left-color: #3a86ff;">
-    <div class="gfx-file-name" style="background: #3a86ff;">SpriteSheetRegionRegistry</div>
-    <p class="gfx-file-desc">Carica i PNG come <span class="gfx-code">TextureRegion</span> e applica <span class="gfx-code">Nearest</span> per mantenere la pixel art nitida.</p>
-</div>
-
 <div class="gfx-file-box" style="border-left-color: #38b000;">
     <div class="gfx-file-name" style="background: #38b000;">GameAssetManager</div>
     <p class="gfx-file-desc">Espone gli asset al resto del gioco e gestisce il <span class="gfx-code">missing_asset</span>, evitando blocchi anche se manca una texture.</p>
@@ -667,10 +662,6 @@ Seguendo un approccio **agile**, in seguito a meeting, attività di testing e ve
             <i class="fa fa-map-o" style="color:#3a86ff;"></i>
             <h3>WorldRenderer</h3>
             <p>Prende il modello grafico della mappa e lo trasforma in una scena 2D ordinata, leggibile e navigabile.</p>
-        </div>
-        <div class="gfx-file-box" style="border-left-color: #9d4edd; margin-top: 12px;">
-            <div class="gfx-file-name" style="background: #9d4edd;">BuildingSpriteRegistry / TileSpriteRegistry</div>
-            <p class="gfx-file-desc">Centralizzano la mappa <b>entità ➔ immagine</b>: gli asset restano separati dalle regole di gioco.</p>
         </div>
     </div>
 </div>
@@ -715,9 +706,9 @@ Seguendo un approccio **agile**, in seguito a meeting, attività di testing e ve
 
 <div class="gfx-grid">
     <div class="gfx-card" style="border-top-color: #14213d;">
-        <i class="fa fa-code-fork"></i>
-        <h3>Team in parallelo</h3>
-        <p>Core logic e grafica comunicano tramite snapshot: meno dipendenze, meno conflitti, sviluppo più ordinato.</p>
+        <i class="fa fa-sitemap"></i>
+        <h3>Model-View-Presenter</h3>
+        <p>Abbiamo adottato il pattern MVP: il Model contiene stato e regole, la View gestisce ciò che viene mostrato e il Presenter coordina input e snapshot senza accoppiare logica e grafica.</p>
     </div>
     <div class="gfx-card" style="border-top-color: #fca311;">
         <i class="fa fa-shield" style="color: #fca311;"></i>
