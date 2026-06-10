@@ -83,6 +83,157 @@ transition: slide
 .border-red { border-left-color: #d90429 !important; }
 .bg-red { background: #d90429 !important; color: white !important; }
     
+
+/* Stile sezione Architettura & Motore Grafico */
+.reveal h2.gfx-title {
+    color: #14213d !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 40px !important;
+    margin-bottom: 6px !important;
+}
+.gfx-subtitle {
+    text-align: center !important;
+    color: #555 !important;
+    font-size: 22px !important;
+    margin: 0 0 24px 0 !important;
+}
+.gfx-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 18px;
+}
+.gfx-card {
+    background: linear-gradient(180deg, rgba(20,33,61,0.08), rgba(0,0,0,0.03));
+    border-top: 4px solid #14213d;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 18px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+}
+.gfx-card i {
+    font-size: 38px;
+    color: #14213d;
+    margin-bottom: 10px;
+}
+.gfx-card h3 {
+    font-size: 24px !important;
+    color: #000 !important;
+    margin: 6px 0 8px 0 !important;
+}
+.gfx-card p {
+    font-size: 19px !important;
+    text-align: center !important;
+    color: #000 !important;
+    margin: 0 !important;
+}
+.gfx-code {
+    background: #14213d;
+    color: #ffffff !important;
+    font-family: monospace;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 18px;
+    white-space: nowrap;
+}
+.gfx-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 22px 0;
+}
+.gfx-step {
+    background: rgba(0,0,0,0.05);
+    border-top: 4px solid #fca311;
+    border-radius: 10px;
+    padding: 16px 12px;
+    width: 170px;
+    min-height: 90px;
+    text-align: center;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+.gfx-step i {
+    color: #fca311;
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+.gfx-step h3 {
+    color: #000 !important;
+    font-size: 20px !important;
+    margin: 0 0 4px 0 !important;
+}
+.gfx-step p {
+    color: #000 !important;
+    font-size: 15px !important;
+    text-align: center !important;
+    margin: 0 !important;
+}
+.gfx-arrow {
+    color: #8c1c13;
+    font-size: 28px;
+    font-weight: bold;
+}
+.gfx-file-box {
+    background: rgba(0,0,0,0.05);
+    border-left: 5px solid #14213d;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.gfx-file-name {
+    background: #14213d;
+    color: white;
+    font-family: monospace;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 18px;
+    min-width: 260px;
+    text-align: center;
+}
+.gfx-file-desc {
+    color: #000 !important;
+    font-size: 19px !important;
+    margin: 0 !important;
+    text-align: left !important;
+}
+.gfx-highlight {
+    background: rgba(252,163,17,0.13);
+    border-left: 6px solid #fca311;
+    padding: 14px;
+    margin-top: 18px;
+    border-radius: 6px;
+}
+.gfx-highlight p {
+    margin: 0 !important;
+    font-size: 20px !important;
+    text-align: center !important;
+    color: #000 !important;
+}
+.gfx-layer-stack {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 8px;
+}
+.gfx-layer {
+    background: rgba(20,33,61,0.08);
+    border-left: 5px solid #3a86ff;
+    padding: 9px 12px;
+    border-radius: 5px;
+    font-size: 18px;
+    color: #000;
+    text-align: left;
+}
+
 .reveal h1, .reveal h2, .reveal h3 {
     color: #8c1c13 !important; /* Rosso lacca scuro, più elegante su bianco */
     font-family: 'Playfair Display', serif;
@@ -258,78 +409,147 @@ transition: slide
 
 ---
 
-## Architettura del Motore Grafico
-### Perché libGDX e Scene2D
+## Architettura & Motore Grafico
+### Dal modello di gioco ai pixel su schermo
 
-<p style="color: #000;">
-Abbiamo scelto <b>libGDX</b> perché è pensato per il rendering 2D continuo, non per UI desktop tradizionali. Offre controllo diretto su <code>SpriteBatch</code>, texture, camera ortografica e game loop (<code>render(delta)</code>), permettendoci di decidere <b>cosa disegnare, dove e in quale ordine</b> a ogni frame.
-</p>
+<h2 class="gfx-title">Perché libGDX?</h2>
+<p class="gfx-subtitle">Non una UI desktop: un simulatore 2D con rendering continuo, asset stratificati e controllo frame-by-frame.</p>
 
-<div class="important-box">
-<p style="margin: 0 !important; font-size: 21px !important; color: #000;">
-<b>Perché non JavaFX o Swing?</b> Sono toolkit per applicazioni a widget: non hanno game loop nativo, batching delle sprite o integrazione OpenGL pronta all’uso. libGDX è più adatto a rendering 60 FPS, zoom pixel-perfect e sprite stratificati.
-</p>
+<div class="gfx-grid">
+    <div class="gfx-card" style="border-top-color: #3a86ff;">
+        <i class="fa fa-refresh" style="color: #3a86ff;"></i>
+        <h3>Game Loop Reattivo</h3>
+        <p><span class="gfx-code">render(delta)</span> aggiorna la scena a ogni frame, mantenendo fluida la simulazione.</p>
+    </div>
+    <div class="gfx-card" style="border-top-color: #38b000;">
+        <i class="fa fa-picture-o" style="color: #38b000;"></i>
+        <h3>SpriteBatch</h3>
+        <p>Disegno efficiente di tile, edifici e overlay senza appesantire il motore grafico.</p>
+    </div>
+    <div class="gfx-card" style="border-top-color: #d90429;">
+        <i class="fa fa-video-camera" style="color: #d90429;"></i>
+        <h3>Camera Ortografica</h3>
+        <p>Pan, zoom controllato e griglia pixel-perfect per una mappa leggibile e stabile.</p>
+    </div>
+    <div class="gfx-card" style="border-top-color: #9d4edd;">
+        <i class="fa fa-object-group" style="color: #9d4edd;"></i>
+        <h3>Scene2D per la UI</h3>
+        <p><span class="gfx-code">Stage</span> e <span class="gfx-code">Table</span> gestiscono HUD, Build Menu e pannelli senza coordinate manuali.</p>
+    </div>
 </div>
 
-<p style="font-size: 22px !important; color: #000;">
-Per la <b>UI in-game</b> usiamo <b>Scene2D</b>: uno <code>Stage</code> gestisce scena e input, mentre HUD, Build Menu e Market estendono <code>Table</code> per disporre <code>Actor</code> come Label, Image e TextButton senza calcolare coordinate manualmente.
-</p>
-
----
-
-## Architettura del Motore Grafico
-### Caricamento e Rendering della Mappa 2D
-
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
-<div>
-<p style="color: #000;">
-Gli asset sono <b>PNG singoli già tagliati</b>, uno per ogni chiave: tile, edifici, feature naturali e icone. Il <code>SpriteSheetRegionRegistry</code> li carica come <code>Texture</code>, applica <code>TextureFilter.Nearest</code> per preservare il <b>pixel art nitido</b> e li espone come <code>TextureRegion</code> tramite il <code>GameAssetManager</code>.
-</p>
-
-<p style="font-size: 22px !important; color: #000;">
-Se una chiave manca, il gioco non si blocca: viene loggato l’errore e usato un <code>missing_asset</code> di fallback.
-</p>
-</div>
-
-<div>
-<div class="important-box">
-<p style="margin: 0 !important; font-size: 20px !important; color: #000;"><b>Pipeline di rendering</b></p>
-<p style="font-size: 18px !important; margin: 8px 0 0 0 !important; color: #000;">
-Il <code>WorldRenderer</code> usa un solo <code>SpriteBatch</code>, sincronizzato con la <code>OrthographicCamera</code>, e disegna la scena a livelli:
-</p>
-<ol style="font-size: 18px !important; color: #000;">
-    <li>Terreno</li>
-    <li>Bordi di foresta</li>
-    <li>Feature naturali</li>
-    <li>Edifici e anteprima costruzione</li>
-    <li>Animazioni</li>
-</ol>
-<p style="font-size: 17px !important; margin: 0 !important; color: #000;">
-La griglia di selezione viene disegnata come overlay finale.
-</p>
-</div>
-</div>
+<div class="gfx-highlight">
+    <p><b>Idea chiave:</b> libGDX ci dà controllo da videogioco; Scene2D ci evita di reinventare il layout dell'interfaccia.</p>
 </div>
 
 ---
 
-## Architettura del Motore Grafico
-### Disaccoppiamento tra Logica e Rendering
+## Architettura & Motore Grafico
+### Pipeline asset e rendering della mappa
 
-<p style="color: #000;">
-La scelta chiave è che <b>il renderer non conosce il dominio</b>. La logica di gioco produce a ogni tick un <code>VillageSnapshot</code> <b>immutabile</b>, cioè una fotografia di sola lettura dello stato. Il <code>WorldRenderer</code> riceve lo snapshot e disegna, senza modificare il modello.
-</p>
+<h2 class="gfx-title">Dall'asset PNG alla scena 2D</h2>
+<p class="gfx-subtitle">Una pipeline semplice da spiegare: carichiamo, traduciamo, ordiniamo e disegniamo.</p>
 
-<div class="important-box">
-<p style="margin: 0 !important; font-size: 21px !important; color: #000;">
-<b>Vantaggio principale:</b> logica e grafica hanno potuto lavorare <b>in parallelo</b> su un contratto stabile. Il motore grafico resta sostituibile, testabile e senza accoppiamento bidirezionale con il modello.
-</p>
+<div class="gfx-flow">
+    <div class="gfx-step">
+        <i class="fa fa-file-image-o"></i>
+        <h3>PNG</h3>
+        <p>Tile, edifici, icone e feature.</p>
+    </div>
+    <div class="gfx-arrow">➔</div>
+    <div class="gfx-step">
+        <i class="fa fa-database"></i>
+        <h3>Registry</h3>
+        <p>Chiavi asset e fallback.</p>
+    </div>
+    <div class="gfx-arrow">➔</div>
+    <div class="gfx-step">
+        <i class="fa fa-th-large"></i>
+        <h3>Render Model</h3>
+        <p>Ogni cella diventa disegnabile.</p>
+    </div>
+    <div class="gfx-arrow">➔</div>
+    <div class="gfx-step">
+        <i class="fa fa-magic"></i>
+        <h3>WorldRenderer</h3>
+        <p>Disegno stratificato.</p>
+    </div>
 </div>
 
-<p style="font-size: 22px !important; color: #000;">
-Il collegamento è gestito dall’<b>Adapter</b> (<code>SnapshotToRenderModelAdapter</code>), che converte ogni cella in un <code>CellRenderModel</code>. I <b>Registry</b> dedicati (<code>BuildingSpriteRegistry</code>, <code>TileSpriteRegistry</code>, …) mappano gli enum di dominio alle chiavi degli asset, centralizzando la corrispondenza <b>entità ➔ immagine</b> e gestendo i fallback.
-</p>
+<div class="gfx-grid">
+    <div>
+        <div class="gfx-file-box" style="border-left-color: #3a86ff;">
+            <div class="gfx-file-name" style="background: #3a86ff;">SpriteSheetRegionRegistry</div>
+            <p class="gfx-file-desc">Carica i PNG come <span class="gfx-code">TextureRegion</span> e applica <span class="gfx-code">Nearest</span> per mantenere la pixel art nitida.</p>
+        </div>
+        <div class="gfx-file-box" style="border-left-color: #38b000;">
+            <div class="gfx-file-name" style="background: #38b000;">GameAssetManager</div>
+            <p class="gfx-file-desc">Espone gli asset al resto del gioco e gestisce il <span class="gfx-code">missing_asset</span> senza bloccare la partita.</p>
+        </div>
+    </div>
+    <div class="gfx-card" style="border-top-color: #fca311; text-align: left;">
+        <h3 style="text-align: center;">Ordine di rendering</h3>
+        <div class="gfx-layer-stack">
+            <div class="gfx-layer">1. Terreno base</div>
+            <div class="gfx-layer" style="border-left-color:#38b000;">2. Bordi di foresta</div>
+            <div class="gfx-layer" style="border-left-color:#fca311;">3. Feature naturali</div>
+            <div class="gfx-layer" style="border-left-color:#d90429;">4. Edifici e anteprima costruzione</div>
+            <div class="gfx-layer" style="border-left-color:#9d4edd;">5. Animazioni e griglia di selezione</div>
+        </div>
+    </div>
+</div>
 
+---
+
+## Architettura & Motore Grafico
+### Disaccoppiamento tra logica e rendering
+
+<h2 class="gfx-title">Contratto stabile: Snapshot ➔ Adapter ➔ Renderer</h2>
+<p class="gfx-subtitle">La logica calcola il villaggio; la grafica riceve solo ciò che deve disegnare.</p>
+
+<div class="gfx-flow">
+    <div class="gfx-step" style="border-top-color:#8c1c13;">
+        <i class="fa fa-cogs" style="color:#8c1c13;"></i>
+        <h3>Core Logic</h3>
+        <p>Regole, risorse e tick.</p>
+    </div>
+    <div class="gfx-arrow">➔</div>
+    <div class="gfx-step" style="border-top-color:#fca311;">
+        <i class="fa fa-camera-retro" style="color:#fca311;"></i>
+        <h3>VillageSnapshot</h3>
+        <p>Fotografia immutabile.</p>
+    </div>
+    <div class="gfx-arrow">➔</div>
+    <div class="gfx-step" style="border-top-color:#3a86ff;">
+        <i class="fa fa-exchange" style="color:#3a86ff;"></i>
+        <h3>Adapter</h3>
+        <p>Traduce dominio in grafica.</p>
+    </div>
+    <div class="gfx-arrow">➔</div>
+    <div class="gfx-step" style="border-top-color:#38b000;">
+        <i class="fa fa-desktop" style="color:#38b000;"></i>
+        <h3>WorldRenderer</h3>
+        <p>Disegna senza modificare il modello.</p>
+    </div>
+</div>
+
+<div class="gfx-grid">
+    <div class="gfx-card" style="border-top-color: #14213d;">
+        <i class="fa fa-code-fork"></i>
+        <h3>Team in parallelo</h3>
+        <p>Core logic e grafica comunicano tramite snapshot: meno dipendenze, meno conflitti, sviluppo più ordinato.</p>
+    </div>
+    <div class="gfx-card" style="border-top-color: #fca311;">
+        <i class="fa fa-shield" style="color: #fca311;"></i>
+        <h3>Renderer sicuro</h3>
+        <p>Il renderer non conosce le regole di gioco: legge dati pronti e li trasforma in immagini.</p>
+    </div>
+</div>
+
+<div class="gfx-file-box" style="border-left-color: #9d4edd; margin-top: 22px;">
+    <div class="gfx-file-name" style="background: #9d4edd;">BuildingSpriteRegistry / TileSpriteRegistry</div>
+    <p class="gfx-file-desc">Centralizzano la mappa <b>entità ➔ immagine</b>, così cambiare un asset non richiede modifiche alla logica.</p>
+</div>
 ---
 
 # Interazione Utente & UI Layout
