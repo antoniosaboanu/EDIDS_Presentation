@@ -2,12 +2,20 @@
 title: Daimyo Simulator - Presentazione Progetto
 ga: ua-123456-1
 mode: slide
-theme: night
+theme: white
 transition: slide
 ---
 
 <style>
-/* CSS per rendere le tue slide dinamiche e schematiche */
+    
+/* FORZATURA SFONDO BIANCO */
+.reveal {
+    background-color: #ffffff !important;
+}
+.reveal .slides section {
+    background-color: #ffffff !important;
+}
+/* CSS per rendere le tue slide dinamiche e schematiche su sfondo bianco */
 .reveal h2.ux-title {
     color: #fca311 !important;
     text-transform: uppercase;
@@ -21,8 +29,11 @@ transition: slide
     margin-top: 30px;
 }
 .ux-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.05); /* Grigio leggero su bianco */
     border-top: 4px solid #fca311;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
@@ -36,11 +47,11 @@ transition: slide
 }
 .ux-card h3 {
     font-size: 26px !important;
-    color: #fff !important;
+    color: #000 !important; /* Testo nero */
     margin-bottom: 10px;
 }
 .file-box {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.05); /* Sfondo chiaro per i file */
     border-left: 5px solid #14213d;
     padding: 15px;
     margin-bottom: 15px;
@@ -59,7 +70,7 @@ transition: slide
     font-size: 20px;
 }
 .file-desc {
-    color: #e5e5e5;
+    color: #000 !important; /* Testo nero per visibilità */
     font-size: 22px;
     margin: 0 !important;
     text-align: left;
@@ -73,22 +84,23 @@ transition: slide
 .bg-red { background: #d90429 !important; color: white !important; }
     
 .reveal h1, .reveal h2, .reveal h3 {
-    color: #e63946 !important;
+    color: #8c1c13 !important; /* Rosso lacca scuro, più elegante su bianco */
     font-family: 'Playfair Display', serif;
 }
 .reveal p, .reveal li {
     font-size: 28px !important;
     text-align: justify;
+    color: #000 !important; /* Testo corpo nero */
 }
 .reveal .important-box {
-    background: rgba(230, 57, 70, 0.1);
-    border-left: 6px solid #e63946;
+    background: rgba(140, 28, 19, 0.05);
+    border-left: 6px solid #8c1c13;
     padding: 15px;
     margin-top: 20px;
     border-radius: 4px;
 }
 .reveal .todo-box {
-    background: rgba(241, 196, 15, 0.15);
+    background: rgba(241, 196, 15, 0.1);
     border-left: 6px solid #f1c40f;
     padding: 20px;
     margin-top: 20px;
@@ -96,7 +108,7 @@ transition: slide
     text-align: left;
 }
 .reveal .todo-title {
-    color: #f1c40f !important;
+    color: #b8860b !important; /* Oro scuro leggibile su bianco */
     font-weight: bold;
     font-size: 24px;
     margin-bottom: 10px;
@@ -108,15 +120,12 @@ transition: slide
 ### Presentazione del Progetto
 
 <br>
-<p style="text-align: center !important; font-size: 24px !important; color: #aaa;">
+<p style="text-align: center !important; font-size: 24px !important; color: #555;">
     <b>Team di Sviluppo:</b><br>
     Antonio Saboanu, Edoardo Perissinotto, Luca Feggi, Mario Pepe
 </p>
 
 ---
-
-## Il Nostro Workflow
-### Linea Temporale dello Sviluppo
 
 ## Il Nostro Workflow
 ### Linea Temporale dello Sviluppo
@@ -128,10 +137,11 @@ transition: slide
 <br>
 
 <div class="important-box">
-<p style="margin: 0 !important; font-size: 22px !important; text-align: center !important;">
+<p style="margin: 0 !important; font-size: 22px !important; text-align: center !important; color: #000;">
     Un percorso di 5 settimane incentrato sul parallelismo tattico, disaccoppiamento architetturale e pulizia del codice.
 </p>
 </div>
+
 ---
 
 ## Prima Settimana
@@ -147,7 +157,7 @@ transition: slide
 </p>
 </div>
 <div>
-    <img src="https://images.unsplash.com/photo-1528164344705-4754268799af?auto=format&fit=crop&q=80&w=600" alt="Japan Temple" style="border-radius: 8px; border: 2px solid #e63946; box-shadow: 0 10px 20px rgba(0,0,0,0.5);">
+    <img src="https://images.unsplash.com/photo-1528164344705-4754268799af?auto=format&fit=crop&q=80&w=600" alt="Japan Temple" style="border-radius: 8px; border: 2px solid #8c1c13; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
 </div>
 </div>
 
@@ -161,10 +171,10 @@ transition: slide
 </p>
 
 <div class="important-box">
-<p style="margin: 0 !important; font-weight: bold;">
+<p style="margin: 0 !important; font-weight: bold; color: #000;">
     Separazione Netta delle Responsabilità:
 </p>
-<ul>
+<ul style="color: #000;">
     <li><b>UX / UI (Grafica e Interazione):</b> Gestita da Antonio e Luca.</li>
     <li><b>Core Logic (Motore e Regole):</b> Gestita da Edoardo e Mario.</li>
 </ul>
@@ -186,7 +196,7 @@ transition: slide
 </p>
 </div>
 <div>
-    <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&q=80&w=600" alt="Code Testing" style="border-radius: 8px; border: 2px solid #e63946; box-shadow: 0 10px 20px rgba(0,0,0,0.5);">
+    <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&q=80&w=600" alt="Code Testing" style="border-radius: 8px; border: 2px solid #8c1c13; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
 </div>
 </div>
 
@@ -211,23 +221,23 @@ transition: slide
 ## Stesura del Codice
 ### La Struttura dell'Applicazione
 
-<p style="text-align: center !important;">
+<p style="text-align: center !important; color: #000;">
     L'intera implementazione software di Daimyo Simulator è stata segmentata in tre macro-aree indipendenti e comunicanti:
 </p>
 
 <br>
 <div style="display: flex; gap: 20px; justify-content: space-between;">
-    <div style="background: rgba(255,255,255,0.05); padding: 20px; flex: 1; text-align: center; border-radius: 4px;">
-        <h3 style="color: #52b788 !important;">LOGICA</h3>
-        <p style="font-size: 18px !important; text-align: center !important;">Motore matematico, tick e risorse.</p>
+    <div style="background: rgba(0,0,0,0.05); padding: 20px; flex: 1; text-align: center; border-radius: 4px; border: 1px solid #ddd;">
+        <h3 style="color: #388e3c !important;">LOGICA</h3>
+        <p style="font-size: 18px !important; text-align: center !important; color: #000;">Motore matematico, tick e risorse.</p>
     </div>
-    <div style="background: rgba(255,255,255,0.05); padding: 20px; flex: 1; text-align: center; border-radius: 4px;">
-        <h3 style="color: #4cc9f0 !important;">MOTORE GRAFICO</h3>
-        <p style="font-size: 18px !important; text-align: center !important;">Rendering, Texture Atlas e Stage.</p>
+    <div style="background: rgba(0,0,0,0.05); padding: 20px; flex: 1; text-align: center; border-radius: 4px; border: 1px solid #ddd;">
+        <h3 style="color: #1976d2 !important;">MOTORE GRAFICO</h3>
+        <p style="font-size: 18px !important; text-align: center !important; color: #000;">Rendering, Texture Atlas e Stage.</p>
     </div>
-    <div style="background: rgba(255,255,255,0.05); padding: 20px; flex: 1; text-align: center; border-radius: 4px;">
-        <h3 style="color: #f72585 !important;">INTERAZIONE</h3>
-        <p style="font-size: 18px !important; text-align: center !important;">Input router, comandi e pannelli UI.</p>
+    <div style="background: rgba(0,0,0,0.05); padding: 20px; flex: 1; text-align: center; border-radius: 4px; border: 1px solid #ddd;">
+        <h3 style="color: #c2185b !important;">INTERAZIONE</h3>
+        <p style="font-size: 18px !important; text-align: center !important; color: #000;">Input router, comandi e pannelli UI.</p>
     </div>
 </div>
 
@@ -251,17 +261,17 @@ transition: slide
 ## Architettura del Motore Grafico
 ### Perché libGDX e Scene2D
 
-<p>
+<p style="color: #000;">
 Abbiamo scelto <b>libGDX</b> perché è pensato per il rendering 2D continuo, non per UI desktop tradizionali. Offre controllo diretto su <code>SpriteBatch</code>, texture, camera ortografica e game loop (<code>render(delta)</code>), permettendoci di decidere <b>cosa disegnare, dove e in quale ordine</b> a ogni frame.
 </p>
 
 <div class="important-box">
-<p style="margin: 0 !important; font-size: 21px !important;">
+<p style="margin: 0 !important; font-size: 21px !important; color: #000;">
 <b>Perché non JavaFX o Swing?</b> Sono toolkit per applicazioni a widget: non hanno game loop nativo, batching delle sprite o integrazione OpenGL pronta all’uso. libGDX è più adatto a rendering 60 FPS, zoom pixel-perfect e sprite stratificati.
 </p>
 </div>
 
-<p style="font-size: 22px !important;">
+<p style="font-size: 22px !important; color: #000;">
 Per la <b>UI in-game</b> usiamo <b>Scene2D</b>: uno <code>Stage</code> gestisce scena e input, mentre HUD, Build Menu e Market estendono <code>Table</code> per disporre <code>Actor</code> come Label, Image e TextButton senza calcolare coordinate manualmente.
 </p>
 
@@ -272,29 +282,29 @@ Per la <b>UI in-game</b> usiamo <b>Scene2D</b>: uno <code>Stage</code> gestisce 
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
 <div>
-<p>
+<p style="color: #000;">
 Gli asset sono <b>PNG singoli già tagliati</b>, uno per ogni chiave: tile, edifici, feature naturali e icone. Il <code>SpriteSheetRegionRegistry</code> li carica come <code>Texture</code>, applica <code>TextureFilter.Nearest</code> per preservare il <b>pixel art nitido</b> e li espone come <code>TextureRegion</code> tramite il <code>GameAssetManager</code>.
 </p>
 
-<p style="font-size: 22px !important;">
+<p style="font-size: 22px !important; color: #000;">
 Se una chiave manca, il gioco non si blocca: viene loggato l’errore e usato un <code>missing_asset</code> di fallback.
 </p>
 </div>
 
 <div>
 <div class="important-box">
-<p style="margin: 0 !important; font-size: 20px !important;"><b>Pipeline di rendering</b></p>
-<p style="font-size: 18px !important; margin: 8px 0 0 0 !important;">
+<p style="margin: 0 !important; font-size: 20px !important; color: #000;"><b>Pipeline di rendering</b></p>
+<p style="font-size: 18px !important; margin: 8px 0 0 0 !important; color: #000;">
 Il <code>WorldRenderer</code> usa un solo <code>SpriteBatch</code>, sincronizzato con la <code>OrthographicCamera</code>, e disegna la scena a livelli:
 </p>
-<ol style="font-size: 18px !important;">
+<ol style="font-size: 18px !important; color: #000;">
     <li>Terreno</li>
     <li>Bordi di foresta</li>
     <li>Feature naturali</li>
     <li>Edifici e anteprima costruzione</li>
     <li>Animazioni</li>
 </ol>
-<p style="font-size: 17px !important; margin: 0 !important;">
+<p style="font-size: 17px !important; margin: 0 !important; color: #000;">
 La griglia di selezione viene disegnata come overlay finale.
 </p>
 </div>
@@ -306,17 +316,17 @@ La griglia di selezione viene disegnata come overlay finale.
 ## Architettura del Motore Grafico
 ### Disaccoppiamento tra Logica e Rendering
 
-<p>
+<p style="color: #000;">
 La scelta chiave è che <b>il renderer non conosce il dominio</b>. La logica di gioco produce a ogni tick un <code>VillageSnapshot</code> <b>immutabile</b>, cioè una fotografia di sola lettura dello stato. Il <code>WorldRenderer</code> riceve lo snapshot e disegna, senza modificare il modello.
 </p>
 
 <div class="important-box">
-<p style="margin: 0 !important; font-size: 21px !important;">
+<p style="margin: 0 !important; font-size: 21px !important; color: #000;">
 <b>Vantaggio principale:</b> logica e grafica hanno potuto lavorare <b>in parallelo</b> su un contratto stabile. Il motore grafico resta sostituibile, testabile e senza accoppiamento bidirezionale con il modello.
 </p>
 </div>
 
-<p style="font-size: 22px !important;">
+<p style="font-size: 22px !important; color: #000;">
 Il collegamento è gestito dall’<b>Adapter</b> (<code>SnapshotToRenderModelAdapter</code>), che converte ogni cella in un <code>CellRenderModel</code>. I <b>Registry</b> dedicati (<code>BuildingSpriteRegistry</code>, <code>TileSpriteRegistry</code>, …) mappano gli enum di dominio alle chiavi degli asset, centralizzando la corrispondenza <b>entità ➔ immagine</b> e gestendo i fallback.
 </p>
 
@@ -329,22 +339,22 @@ Il collegamento è gestito dall’<b>Adapter</b> (<code>SnapshotToRenderModelAda
 
 <div class="ux-grid">
     <div class="ux-card" style="border-top-color: #3a86ff;">
-        <i class="fa-solid fa-eye" style="color: #3a86ff;"></i>
+        <i class="fa fa-mouse-pointer" style="color: #3a86ff;"></i>
         <h3 style="color: #000000 !important;">Interazione Fluida</h3>
         <p style="text-align: center; font-size: 20px !important; color: #000000 !important;">Select & Drag, navigazione mappa (Pan/Zoom) e interazione coerente coi bottoni senza conflitti.</p>
     </div>
     <div class="ux-card" style="border-top-color: #38b000;">
-        <i class="fa-solid fa-eye" style="color: #38b000;"></i>
+        <i class="fa fa-eye" style="color: #38b000;"></i>
         <h3 style="color: #000000 !important;">Visibilità Contestuale</h3>
         <p style="text-align: center; font-size: 20px !important; color: #000000 !important;">HUD organizzato a cornice. I menù e i dettagli (es. Market) appaiono solo quando selezioni una struttura.</p>
     </div>
     <div class="ux-card" style="border-top-color: #d90429;">
-        <i class="fa-solid fa-bell" style="color: #d90429;"></i>
+        <i class="fa fa-bell" style="color: #d90429;"></i>
         <h3 style="color: #000000 !important;">Alert Significativi</h3>
         <p style="text-align: center; font-size: 20px !important; color: #000000 !important;">Pop-up cromatici (verde/rosso) e First-Time Warnings per educare il giocatore senza fare spam.</p>
     </div>
     <div class="ux-card" style="border-top-color: #9d4edd;">
-        <i class="fa-solid fa-sliders" style="color: #9d4edd;"></i>
+        <i class="fa fa-sliders" style="color: #9d4edd;"></i>
         <h3 style="color: #000000 !important;">Controllo Utente</h3>
         <p style="text-align: center; font-size: 20px !important; color: #000000 !important;">Menù Impostazioni facilmente accessibile, controllo velocità logica e opzioni di salvataggio veloci.</p>
     </div>
@@ -356,22 +366,22 @@ Il collegamento è gestito dall’<b>Adapter</b> (<code>SnapshotToRenderModelAda
 
 <div class="file-box border-blue">
     <div class="file-name bg-blue">GameInputProcessor</div>
-    <p class="file-desc" style="color: #ffffff !important;">Ascolta i click "grezzi". Ignora le azioni fuori dalla griglia e impedisce conflitti se l'utente sta cliccando sull'HUD.</p>
+    <p class="file-desc" style="color: #000000 !important;">Ascolta i click "grezzi". Ignora le azioni fuori dalla griglia e impedisce conflitti se l'utente sta cliccando sull'HUD.</p>
 </div>
 
 <div class="file-box border-blue">
     <div class="file-name bg-blue">CameraController</div>
-    <p class="file-desc" style="color: #ffffff !important;">Gestisce l'esplorazione: permette il "Select and Drag", il pan (WASD) e blocca lo zoom per non rompere la prospettiva.</p>
+    <p class="file-desc" style="color: #000000 !important;">Gestisce l'esplorazione: permette il "Select and Drag", il pan (WASD) e blocca lo zoom per non rompere la prospettiva.</p>
 </div>
 
 <div class="file-box border-blue">
     <div class="file-name bg-blue">BuildModeState</div>
-    <p class="file-desc" style="color: #ffffff !important;">La memoria a breve termine della UX: ricorda se stai solo esplorando, se hai in mano un edificio o il martello da demolizione.</p>
+    <p class="file-desc" style="color: #000000 !important;">La memoria a breve termine della UX: ricorda se stai solo esplorando, se hai in mano un edificio o il martello da demolizione.</p>
 </div>
 
 <div class="file-box border-blue">
     <div class="file-name bg-blue">InputCommandRouter</div>
-    <p class="file-desc" style="color: #ffffff !important;">Lo "smistatore". Prende il click convertito e decide: ispeziono la cella? Piazzo l'edificio? O cancello tutto?</p>
+    <p class="file-desc" style="color: #000000 !important;">Lo "smistatore". Prende il click convertito e decide: ispeziono la cella? Piazzo l'edificio? O cancello tutto?</p>
 </div>
 
 ---
@@ -380,22 +390,22 @@ Il collegamento è gestito dall’<b>Adapter</b> (<code>SnapshotToRenderModelAda
 
 <div class="file-box border-green">
     <div class="file-name bg-green">DashboardHud</div>
-    <p class="file-desc" style="color: #ffffff !important;">La cornice madre. Racchiude BuildMenu, Risorse e parametri ai bordi, lasciando il centro dello schermo libero per giocare.</p>
+    <p class="file-desc" style="color: #000000 !important;">La cornice madre. Racchiude BuildMenu, Risorse e parametri ai bordi, lasciando il centro dello schermo libero per giocare.</p>
 </div>
 
 <div class="file-box border-red">
     <div class="file-name bg-red">WarningPanel & EventModal</div>
-    <p class="file-desc" style="color: #ffffff !important;">Gestiscono i First-Time Warnings (es. quando finisce il cibo) e mostrano gli eventi casuali sfruttando la psicologia dei colori.</p>
+    <p class="file-desc" style="color: #000000 !important;">Gestiscono i First-Time Warnings (es. quando finisce il cibo) e mostrano gli eventi casuali sfruttando la psicologia dei colori.</p>
 </div>
 
 <div class="file-box border-green">
     <div class="file-name bg-green">SelectedBuildingPanel</div>
-    <p class="file-desc" style="color: #ffffff !important;">UX contestuale: appare in basso solo quando ispezioni un edificio. Nasconde la complessità finché non la richiedi (es. tasto Trade).</p>
+    <p class="file-desc" style="color: #000000 !important;">UX contestuale: appare in basso solo quando ispezioni un edificio. Nasconde la complessità finché non la richiedi (es. tasto Trade).</p>
 </div>
 
 <div class="file-box border-green">
     <div class="file-name bg-green">SettingsModal / Dialogs</div>
-    <p class="file-desc" style="color: #ffffff !important;">Modali in sovraimpressione per mettere in pausa e dare controllo su Salvataggi, Tutorial e regolazione Audio asincrona.</p>
+    <p class="file-desc" style="color: #000000 !important;">Modali in sovraimpressione per mettere in pausa e dare controllo su Salvataggi, Tutorial e regolazione Audio asincrona.</p>
 </div>
 
 ---
@@ -416,15 +426,15 @@ Il collegamento è gestito dall’<b>Adapter</b> (<code>SnapshotToRenderModelAda
 
 <div class="file-box" style="border-left-color: #fca311 !important; margin-top: 30px;">
     <div class="file-name" style="background: #fca311 !important; color: #000 !important;">VillagePersistenceService</div>
-    <p class="file-desc" style="color: #ffffff !important;">L'orchestratore: gestisce i 5 slot di salvataggio nella cartella utente e coordina l'apertura/chiusura dei file su disco.</p>
+    <p class="file-desc" style="color: #000000 !important;">L'orchestratore: gestisce i 5 slot di salvataggio nella cartella utente e coordina l'apertura/chiusura dei file su disco.</p>
 </div>
 
 <div class="file-box" style="border-left-color: #fca311 !important;">
     <div class="file-name" style="background: #fca311 !important; color: #000 !important;">VillageMapper</div>
-    <p class="file-desc" style="color: #ffffff !important;">Il traduttore: trasforma l'oggetto Java <code>Village</code> in una stringa JSON e viceversa, gestendo anche le versioni del salvataggio.</p>
+    <p class="file-desc" style="color: #000000 !important;">Il traduttore: trasforma l'oggetto Java <code>Village</code> in una stringa JSON e viceversa, gestendo anche le versioni del salvataggio.</p>
 </div>
 
 <div class="file-box" style="border-left-color: #fca311 !important;">
     <div class="file-name" style="background: #fca311 !important; color: #000 !important;">GamePersistenceManager</div>
-    <p class="file-desc" style="color: #ffffff !important;">Il ponte con la UI: permette ai pulsanti "Save" e "Load" del menù di dialogare con il sistema di scrittura senza bloccare il rendering.</p>
+    <p class="file-desc" style="color: #000000 !important;">Il ponte con la UI: permette ai pulsanti "Save" e "Load" del menù di dialogare con il sistema di scrittura senza bloccare il rendering.</p>
 </div>
