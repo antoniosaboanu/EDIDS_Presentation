@@ -292,6 +292,102 @@ transition: slide
     margin-bottom: 10px;
     text-transform: uppercase;
 }
+
+/* Override compatti per la sezione Architettura & Motore Grafico.
+   Le regole sono più specifiche del body text globale, così le slide non eccedono in modalità view. */
+.reveal .gfx-title {
+    font-size: 36px !important;
+    margin-bottom: 3px !important;
+}
+.reveal .gfx-subtitle {
+    font-size: 19px !important;
+    margin: 0 0 14px 0 !important;
+}
+.reveal .gfx-grid {
+    gap: 13px !important;
+    margin-top: 12px !important;
+}
+.reveal .gfx-card {
+    padding: 13px !important;
+}
+.reveal .gfx-card i {
+    font-size: 31px !important;
+    margin-bottom: 5px !important;
+}
+.reveal .gfx-card h3 {
+    font-size: 22px !important;
+    margin: 3px 0 5px 0 !important;
+}
+.reveal .gfx-card p {
+    font-size: 18px !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+}
+.reveal .gfx-code {
+    font-size: 16px !important;
+}
+.reveal .gfx-flow {
+    gap: 7px !important;
+    margin: 14px 0 !important;
+}
+.reveal .gfx-step {
+    width: 160px !important;
+    min-height: 74px !important;
+    padding: 10px 9px !important;
+}
+.reveal .gfx-step i {
+    font-size: 26px !important;
+    margin-bottom: 4px !important;
+}
+.reveal .gfx-step h3 {
+    font-size: 19px !important;
+}
+.reveal .gfx-step p {
+    font-size: 14px !important;
+    line-height: 1.12 !important;
+    text-align: center !important;
+}
+.reveal .gfx-file-box {
+    padding: 9px 11px !important;
+    margin-bottom: 9px !important;
+    gap: 11px !important;
+}
+.reveal .gfx-file-name {
+    font-size: 16px !important;
+    min-width: 235px !important;
+}
+.reveal .gfx-file-desc {
+    font-size: 17px !important;
+    line-height: 1.2 !important;
+    text-align: left !important;
+}
+.reveal .gfx-highlight {
+    padding: 10px !important;
+    margin-top: 12px !important;
+}
+.reveal .gfx-highlight p {
+    font-size: 18px !important;
+    line-height: 1.18 !important;
+    text-align: center !important;
+}
+.reveal .gfx-mini-note {
+    grid-template-columns: 210px 1fr !important;
+    padding: 9px 13px !important;
+    margin-top: 10px !important;
+}
+.reveal .gfx-mini-note .gfx-mini-title {
+    font-size: 17px !important;
+}
+.reveal .gfx-mini-note p {
+    font-size: 17px !important;
+    line-height: 1.16 !important;
+    text-align: left !important;
+}
+.reveal .gfx-layer {
+    font-size: 17px !important;
+    padding: 7px 9px !important;
+}
+
 </style>
 
 # Daimyo Simulator
@@ -440,7 +536,7 @@ transition: slide
 ### Dal modello di gioco ai pixel su schermo
 
 <h2 class="gfx-title">Perché libGDX?</h2>
-<p class="gfx-subtitle">Non una UI desktop: un simulatore 2D con rendering continuo, asset stratificati e controllo frame-by-frame.</p>
+<p class="gfx-subtitle">Serve un motore da gioco: rendering continuo, asset stratificati e controllo frame-by-frame.</p>
 
 <div class="gfx-grid">
     <div class="gfx-card" style="border-top-color: #3a86ff;">
@@ -451,12 +547,12 @@ transition: slide
     <div class="gfx-card" style="border-top-color: #38b000;">
         <i class="fa fa-picture-o" style="color: #38b000;"></i>
         <h3>SpriteBatch</h3>
-        <p>Disegno efficiente di tile, edifici e overlay senza appesantire il motore grafico.</p>
+        <p>Disegna tile, edifici e overlay in modo efficiente, senza appesantire il motore grafico.</p>
     </div>
     <div class="gfx-card" style="border-top-color: #d90429;">
         <i class="fa fa-video-camera" style="color: #d90429;"></i>
         <h3>Camera Ortografica</h3>
-        <p>Pan, zoom controllato e griglia pixel-perfect per una mappa leggibile e stabile.</p>
+        <p>Pan, zoom controllato e griglia pixel-perfect rendono la mappa stabile e leggibile.</p>
     </div>
     <div class="gfx-card" style="border-top-color: #9d4edd;">
         <i class="fa fa-object-group" style="color: #9d4edd;"></i>
@@ -465,22 +561,18 @@ transition: slide
     </div>
 </div>
 
-<div class="gfx-highlight">
-    <p><b>Idea chiave:</b> libGDX ci dà controllo da videogioco; Scene2D ci evita di reinventare il layout dell'interfaccia.</p>
-</div>
-
 <div class="gfx-mini-note">
     <p class="gfx-mini-title">Perché non JavaFX o Swing?</p>
-    <p>Sono ottimi per applicazioni a widget, ma meno adatti a un gioco 2D: non offrono nativamente game loop, batching sprite e pipeline OpenGL pensata per rendering continuo a 60 FPS.</p>
+    <p>Sono ottimi per applicazioni a widget, ma meno adatti a un gioco 2D: libGDX offre game loop, batching sprite e pipeline OpenGL per rendering continuo.</p>
 </div>
 
 ---
 
 ## Architettura & Motore Grafico
-### Pipeline asset e rendering della mappa
+### Pipeline asset
 
-<h2 class="gfx-title">Dall'asset PNG alla scena 2D</h2>
-<p class="gfx-subtitle">Una pipeline semplice da spiegare: carichiamo, traduciamo, ordiniamo e disegniamo.</p>
+<h2 class="gfx-title">Dall'asset PNG al Render Model</h2>
+<p class="gfx-subtitle">Prima trasformiamo i file grafici in riferimenti stabili, poi li esponiamo al resto del gioco.</p>
 
 <div class="gfx-flow">
     <div class="gfx-step">
@@ -504,21 +596,33 @@ transition: slide
     <div class="gfx-step">
         <i class="fa fa-magic"></i>
         <h3>WorldRenderer</h3>
-        <p>Disegno stratificato.</p>
+        <p>La scena viene composta.</p>
     </div>
 </div>
 
+<div class="gfx-file-box" style="border-left-color: #3a86ff;">
+    <div class="gfx-file-name" style="background: #3a86ff;">SpriteSheetRegionRegistry</div>
+    <p class="gfx-file-desc">Carica i PNG come <span class="gfx-code">TextureRegion</span> e applica <span class="gfx-code">Nearest</span> per mantenere la pixel art nitida.</p>
+</div>
+
+<div class="gfx-file-box" style="border-left-color: #38b000;">
+    <div class="gfx-file-name" style="background: #38b000;">GameAssetManager</div>
+    <p class="gfx-file-desc">Espone gli asset al resto del gioco e gestisce il <span class="gfx-code">missing_asset</span>, evitando blocchi anche se manca una texture.</p>
+</div>
+
+<div class="gfx-highlight">
+    <p><b>Obiettivo:</b> rendere gli asset intercambiabili: cambiare un PNG non deve cambiare la logica del simulatore.</p>
+</div>
+
+---
+
+## Architettura & Motore Grafico
+### Rendering della mappa
+
+<h2 class="gfx-title">Ordine visivo e registri grafici</h2>
+<p class="gfx-subtitle">Il renderer non disegna “tutto insieme”: compone la scena in livelli per mantenere leggibilità e coerenza.</p>
+
 <div class="gfx-grid">
-    <div>
-        <div class="gfx-file-box" style="border-left-color: #3a86ff;">
-            <div class="gfx-file-name" style="background: #3a86ff;">SpriteSheetRegionRegistry</div>
-            <p class="gfx-file-desc">Carica i PNG come <span class="gfx-code">TextureRegion</span> e applica <span class="gfx-code">Nearest</span> per mantenere la pixel art nitida.</p>
-        </div>
-        <div class="gfx-file-box" style="border-left-color: #38b000;">
-            <div class="gfx-file-name" style="background: #38b000;">GameAssetManager</div>
-            <p class="gfx-file-desc">Espone gli asset al resto del gioco e gestisce il <span class="gfx-code">missing_asset</span> senza bloccare la partita.</p>
-        </div>
-    </div>
     <div class="gfx-card" style="border-top-color: #fca311; text-align: left;">
         <h3 style="text-align: center;">Ordine di rendering</h3>
         <div class="gfx-layer-stack">
@@ -529,6 +633,21 @@ transition: slide
             <div class="gfx-layer" style="border-left-color:#9d4edd;">5. Animazioni e griglia di selezione</div>
         </div>
     </div>
+    <div>
+        <div class="gfx-card" style="border-top-color: #3a86ff;">
+            <i class="fa fa-map-o" style="color:#3a86ff;"></i>
+            <h3>WorldRenderer</h3>
+            <p>Prende il modello grafico della mappa e lo trasforma in una scena 2D ordinata, leggibile e navigabile.</p>
+        </div>
+        <div class="gfx-file-box" style="border-left-color: #9d4edd; margin-top: 12px;">
+            <div class="gfx-file-name" style="background: #9d4edd;">BuildingSpriteRegistry / TileSpriteRegistry</div>
+            <p class="gfx-file-desc">Centralizzano la mappa <b>entità ➔ immagine</b>: gli asset restano separati dalle regole di gioco.</p>
+        </div>
+    </div>
+</div>
+
+<div class="gfx-highlight">
+    <p><b>Vantaggio pratico:</b> anteprime, animazioni e selezione sono livelli separati, quindi possono cambiare senza riscrivere il disegno del terreno.</p>
 </div>
 
 ---
@@ -578,10 +697,10 @@ transition: slide
     </div>
 </div>
 
-<div class="gfx-file-box" style="border-left-color: #9d4edd; margin-top: 22px;">
-    <div class="gfx-file-name" style="background: #9d4edd;">BuildingSpriteRegistry / TileSpriteRegistry</div>
-    <p class="gfx-file-desc">Centralizzano la mappa <b>entità ➔ immagine</b>, così cambiare un asset non richiede modifiche alla logica.</p>
+<div class="gfx-highlight">
+    <p><b>Risultato:</b> il modello può evolvere senza rompere la UI, e la UI può migliorare senza toccare le formule del simulatore.</p>
 </div>
+
 ---
 
 # Interazione Utente & UI Layout
