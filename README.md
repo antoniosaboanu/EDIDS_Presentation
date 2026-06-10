@@ -234,6 +234,33 @@ transition: slide
     text-align: left;
 }
 
+.gfx-mini-note {
+    background: rgba(140,28,19,0.06);
+    border-left: 6px solid #8c1c13;
+    padding: 13px 16px;
+    margin-top: 14px;
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    gap: 12px;
+    align-items: center;
+}
+.gfx-mini-note .gfx-mini-title {
+    color: #8c1c13 !important;
+    font-size: 18px !important;
+    font-weight: bold;
+    text-align: center !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 !important;
+}
+.gfx-mini-note p {
+    margin: 0 !important;
+    font-size: 18px !important;
+    text-align: left !important;
+    color: #000 !important;
+}
+
 .reveal h1, .reveal h2, .reveal h3 {
     color: #8c1c13 !important; /* Rosso lacca scuro, più elegante su bianco */
     font-family: 'Playfair Display', serif;
@@ -440,6 +467,11 @@ transition: slide
 
 <div class="gfx-highlight">
     <p><b>Idea chiave:</b> libGDX ci dà controllo da videogioco; Scene2D ci evita di reinventare il layout dell'interfaccia.</p>
+</div>
+
+<div class="gfx-mini-note">
+    <p class="gfx-mini-title">Perché non JavaFX o Swing?</p>
+    <p>Sono ottimi per applicazioni a widget, ma meno adatti a un gioco 2D: non offrono nativamente game loop, batching sprite e pipeline OpenGL pensata per rendering continuo a 60 FPS.</p>
 </div>
 
 ---
