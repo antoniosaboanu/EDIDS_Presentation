@@ -7,387 +7,170 @@ transition: slide
 ---
 
 <style>
-    
-/* FORZATURA SFONDO BIANCO */
-.reveal {
-    background-color: #ffffff !important;
+/* --- DESIGN SYSTEM: JAPAN LACQUER & GOLD --- */
+
+.reveal { background-color: #ffffff !important; }
+.reveal .slides section { background-color: #ffffff !important; }
+
+/* Tipografia */
+.reveal h1, .reveal h2, .reveal h3 {
+    color: #8C1C13 !important; /* Rosso Lacca */
+    font-family: 'Playfair Display', serif;
+    text-transform: none !important;
 }
-.reveal .slides section {
-    background-color: #ffffff !important;
+
+/* Titoli di sezione con sottolineatura */
+.reveal h2.ux-title, .reveal h2.gfx-title {
+    font-size: 36px !important;
+    border-bottom: 2px solid #D4AF37 !important; /* Oro */
+    display: inline-block;
+    padding-bottom: 5px;
+    margin-bottom: 20px !important;
 }
-/* CSS per rendere le tue slide dinamiche e schematiche su sfondo bianco */
-.reveal h2.ux-title {
-    color: #fca311 !important;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 40px !important;
-}
-.ux-grid {
+
+/* Card e Griglie */
+.ux-grid, .gfx-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 30px;
+    gap: 15px;
 }
-.ux-card {
-    background: rgba(0, 0, 0, 0.05); /* Grigio leggero su bianco */
-    border-top: 4px solid #fca311;
-    border-bottom: 1px solid #ddd;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 8px;
+
+.ux-card, .gfx-card, .gfx-step {
+    background: #fdfcf0 !important; /* Pergamena */
+    border: 1px solid #d4af37 !important;
+    border-top: 4px solid #8C1C13 !important;
+    padding: 15px !important;
+    border-radius: 4px !important;
     text-align: center;
-    transition: transform 0.2s;
 }
-.ux-card:hover { transform: scale(1.02); }
-.ux-card i {
-    font-size: 40px;
-    color: #fca311;
-    margin-bottom: 15px;
-}
-.ux-card h3 {
-    font-size: 26px !important;
-    color: #000 !important; /* Testo nero */
+
+.ux-card i, .gfx-card i, .gfx-step i {
+    font-size: 30px !important;
+    color: #8C1C13 !important;
     margin-bottom: 10px;
 }
-.file-box {
-    background: rgba(0, 0, 0, 0.05); /* Sfondo chiaro per i file */
-    border-left: 5px solid #14213d;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 4px;
+
+.ux-card h3, .gfx-card h3 {
+    font-size: 20px !important;
+    color: #000 !important;
+    margin: 5px 0 !important;
+}
+
+.ux-card p, .gfx-card p {
+    font-size: 16px !important;
+    line-height: 1.3 !important;
+    color: #2d2d2d !important;
+}
+
+/* File Box (Liste schematiche) */
+.file-box, .gfx-file-box {
+    background: rgba(140, 28, 19, 0.03) !important;
+    border-left: 5px solid #8C1C13 !important;
+    padding: 8px 15px !important;
+    margin-bottom: 8px !important;
     display: flex;
     align-items: center;
     gap: 15px;
 }
-.file-name {
-    background: #fca311;
-    color: #000;
+
+.file-name, .gfx-file-name {
+    background: #8C1C13 !important;
+    color: #ffffff !important;
     font-family: monospace;
     font-weight: bold;
     padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 20px;
+    border-radius: 2px;
+    font-size: 16px;
+    min-width: 250px;
+    text-align: center;
 }
-.file-desc {
-    color: #000 !important; /* Testo nero per visibilità */
-    font-size: 22px;
+
+.file-desc, .gfx-file-desc {
+    color: #000 !important;
+    font-size: 17px !important;
     margin: 0 !important;
     text-align: left;
 }
-/* Colori tematici per i file */
-.border-blue { border-left-color: #3a86ff !important; }
-.bg-blue { background: #3a86ff !important; color: white !important; }
-.border-green { border-left-color: #38b000 !important; }
-.bg-green { background: #38b000 !important; color: white !important; }
-.border-red { border-left-color: #d90429 !important; }
-.bg-red { background: #d90429 !important; color: white !important; }
-    
 
-/* Stile sezione Architettura & Motore Grafico */
-.reveal h2.gfx-title {
-    color: #14213d !important;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 40px !important;
-    margin-bottom: 6px !important;
+/* Box Importanti e Todo */
+.important-box, .gfx-highlight, .reveal .todo-box {
+    background: #fdfcf0 !important;
+    border-left: 6px solid #D4AF37 !important;
+    padding: 15px !important;
+    margin-top: 15px;
+    text-align: left;
 }
-.gfx-subtitle {
-    text-align: center !important;
-    color: #555 !important;
-    font-size: 22px !important;
-    margin: 0 0 24px 0 !important;
-}
-.gfx-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-    margin-top: 18px;
-}
-.gfx-card {
-    background: linear-gradient(180deg, rgba(20,33,61,0.08), rgba(0,0,0,0.03));
-    border-top: 4px solid #14213d;
-    border-bottom: 1px solid #ddd;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    padding: 18px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.06);
-}
-.gfx-card i {
-    font-size: 38px;
-    color: #14213d;
-    margin-bottom: 10px;
-}
-.gfx-card h3 {
-    font-size: 24px !important;
-    color: #000 !important;
-    margin: 6px 0 8px 0 !important;
-}
-.gfx-card p {
-    font-size: 19px !important;
-    text-align: center !important;
-    color: #000 !important;
-    margin: 0 !important;
-}
+
+/* Flow e Frecce */
+.gfx-flow { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 15px 0; }
+.gfx-arrow { color: #8C1C13; font-weight: bold; font-size: 24px; }
+
 .gfx-code {
-    background: #14213d;
-    color: #ffffff !important;
-    font-family: monospace;
-    padding: 3px 8px;
+    background: #2d2d2d;
+    color: #D4AF37 !important;
+    padding: 2px 6px;
     border-radius: 4px;
-    font-size: 18px;
-    white-space: nowrap;
-}
-.gfx-flow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin: 22px 0;
-}
-.gfx-step {
-    background: rgba(0,0,0,0.05);
-    border-top: 4px solid #fca311;
-    border-radius: 10px;
-    padding: 16px 12px;
-    width: 170px;
-    min-height: 90px;
-    text-align: center;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.06);
-}
-.gfx-step i {
-    color: #fca311;
-    font-size: 30px;
-    margin-bottom: 8px;
-}
-.gfx-step h3 {
-    color: #000 !important;
-    font-size: 20px !important;
-    margin: 0 0 4px 0 !important;
-}
-.gfx-step p {
-    color: #000 !important;
-    font-size: 15px !important;
-    text-align: center !important;
-    margin: 0 !important;
-}
-.gfx-arrow {
-    color: #8c1c13;
-    font-size: 28px;
-    font-weight: bold;
-}
-.gfx-file-box {
-    background: rgba(0,0,0,0.05);
-    border-left: 5px solid #14213d;
-    padding: 12px 14px;
-    margin-bottom: 12px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-.gfx-file-name {
-    background: #14213d;
-    color: white;
     font-family: monospace;
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 18px;
-    min-width: 260px;
-    text-align: center;
 }
-.gfx-file-desc {
-    color: #000 !important;
-    font-size: 19px !important;
-    margin: 0 !important;
-    text-align: left !important;
-}
-.gfx-highlight {
-    background: rgba(252,163,17,0.13);
-    border-left: 6px solid #fca311;
-    padding: 14px;
-    margin-top: 18px;
-    border-radius: 6px;
-}
-.gfx-highlight p {
-    margin: 0 !important;
-    font-size: 20px !important;
-    text-align: center !important;
-    color: #000 !important;
-}
-.gfx-layer-stack {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
-    margin-top: 8px;
-}
+
 .gfx-layer {
-    background: rgba(20,33,61,0.08);
-    border-left: 5px solid #3a86ff;
-    padding: 9px 12px;
-    border-radius: 5px;
-    font-size: 18px;
-    color: #000;
+    background: rgba(0,0,0,0.02);
+    border-left: 4px solid #8C1C13;
+    padding: 6px 12px !important;
+    margin-bottom: 5px;
+    font-size: 16px !important;
     text-align: left;
 }
-
-.gfx-mini-note {
-    background: rgba(140,28,19,0.06);
-    border-left: 6px solid #8c1c13;
-    padding: 13px 16px;
-    margin-top: 14px;
-    border-radius: 6px;
-    display: grid;
-    grid-template-columns: 230px 1fr;
-    gap: 12px;
-    align-items: center;
-}
-.gfx-mini-note .gfx-mini-title {
-    color: #8c1c13 !important;
+    
+.important-box p, 
+.gfx-highlight p {
+    color: #2D2D2D !important;
     font-size: 18px !important;
-    font-weight: bold;
-    text-align: center !important;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 0 !important;
+    line-height: 1.3 !important;
 }
+
+.reveal .ux-card li, 
+.reveal .gfx-card li,
+.reveal .important-box li {
+    color: #2D2D2D !important;
+    font-size: 18px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 10px !important;
+}
+    
+.gfx-step h3 {
+    color: #2D2D2D !important;
+    font-size: 18px !important;
+    margin: 5px 0 !important;
+}
+
+.gfx-step p {
+    color: #2D2D2D !important;
+    font-size: 15px !important;
+    line-height: 1.2 !important;
+}
+
+.gfx-layer {
+    color: #2D2D2D !important;
+    font-size: 16px !important;
+}
+    /* Fix per la nota "vs Swing/JavaFX" nella slide libGDX */
 .gfx-mini-note p {
+    color: #2D2D2D !important;
+    font-size: 17px !important;
+    line-height: 1.3 !important;
+    text-align: left !important;
     margin: 0 !important;
-    font-size: 18px !important;
-    text-align: left !important;
-    color: #000 !important;
 }
 
-.reveal h1, .reveal h2, .reveal h3 {
-    color: #8c1c13 !important; /* Rosso lacca scuro, più elegante su bianco */
-    font-family: 'Playfair Display', serif;
-}
-.reveal p, .reveal li {
-    font-size: 28px !important;
-    text-align: justify;
-    color: #000 !important; /* Testo corpo nero */
-}
-.reveal .important-box {
-    background: rgba(140, 28, 19, 0.05);
-    border-left: 6px solid #8c1c13;
-    padding: 15px;
-    margin-top: 20px;
-    border-radius: 4px;
-}
-.reveal .todo-box {
-    background: rgba(241, 196, 15, 0.1);
-    border-left: 6px solid #f1c40f;
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 4px;
-    text-align: left;
-}
-.reveal .todo-title {
-    color: #b8860b !important; /* Oro scuro leggibile su bianco */
-    font-weight: bold;
-    font-size: 24px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-}
-
-/* Override compatti per la sezione Architettura & Motore Grafico.
-   Le regole sono più specifiche del body text globale, così le slide non eccedono in modalità view. */
-.reveal .gfx-title {
-    font-size: 36px !important;
-    margin-bottom: 3px !important;
-}
-.reveal .gfx-subtitle {
-    font-size: 19px !important;
-    margin: 0 0 14px 0 !important;
-}
-.reveal .gfx-grid {
-    gap: 13px !important;
-    margin-top: 12px !important;
-}
-.reveal .gfx-card {
-    padding: 13px !important;
-}
-.reveal .gfx-card i {
-    font-size: 31px !important;
-    margin-bottom: 5px !important;
-}
-.reveal .gfx-card h3 {
-    font-size: 22px !important;
-    margin: 3px 0 5px 0 !important;
-}
-.reveal .gfx-card p {
+.gfx-mini-note .gfx-mini-title {
+    color: #8C1C13 !important;
     font-size: 18px !important;
-    line-height: 1.2 !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
     text-align: center !important;
 }
-.reveal .gfx-code {
-    font-size: 16px !important;
-}
-.reveal .gfx-flow {
-    gap: 7px !important;
-    margin: 14px 0 !important;
-}
-.reveal .gfx-step {
-    width: 160px !important;
-    min-height: 74px !important;
-    padding: 10px 9px !important;
-}
-.reveal .gfx-step i {
-    font-size: 26px !important;
-    margin-bottom: 4px !important;
-}
-.reveal .gfx-step h3 {
-    font-size: 19px !important;
-}
-.reveal .gfx-step p {
-    font-size: 14px !important;
-    line-height: 1.12 !important;
-    text-align: center !important;
-}
-.reveal .gfx-file-box {
-    padding: 9px 11px !important;
-    margin-bottom: 9px !important;
-    gap: 11px !important;
-}
-.reveal .gfx-file-name {
-    font-size: 16px !important;
-    min-width: 235px !important;
-}
-.reveal .gfx-file-desc {
-    font-size: 17px !important;
-    line-height: 1.2 !important;
-    text-align: left !important;
-}
-.reveal .gfx-highlight {
-    padding: 10px !important;
-    margin-top: 12px !important;
-}
-.reveal .gfx-highlight p {
-    font-size: 18px !important;
-    line-height: 1.18 !important;
-    text-align: center !important;
-}
-.reveal .gfx-mini-note {
-    grid-template-columns: 210px 1fr !important;
-    padding: 9px 13px !important;
-    margin-top: 10px !important;
-}
-.reveal .gfx-mini-note .gfx-mini-title {
-    font-size: 17px !important;
-}
-.reveal .gfx-mini-note p {
-    font-size: 17px !important;
-    line-height: 1.16 !important;
-    text-align: left !important;
-}
-.reveal .gfx-layer {
-    font-size: 17px !important;
-    padding: 7px 9px !important;
-}
-
 </style>
 
 # Daimyo Simulator
@@ -401,454 +184,352 @@ transition: slide
 
 ---
 
+## Introduzione
+### Il nostro villaggio
+
+<div style="text-align: center;">
+<img src="https://hackmd.io/_uploads/BJ1038DbGe.png" style="border: 4px solid #8C1C13; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 80%;">
+</div>
+
+---
+
 ## Il Nostro Workflow
 ### Linea Temporale dello Sviluppo
 
-<br>
+<p style="text-align: center; font-size: 22px; color: #8C1C13; margin-top: 50px;">
+    Dall'analisi dei requisiti alla sottomissione finale attraverso Sprint Agile.
+</p>
 
-**Settimana 1** (Brainstorming & User Stories) ➔ **Settimane 2-4** (Stesura Codice & Ruoli) ➔ **Settimana 5** (Testing & Consegna)
+---
 
-<br>
+<h2 class="ux-title">Fase Iniziale: Requisiti e Core Logic (W1-W2)</h2>
+
+<div class="ux-grid">
+    <div class="ux-card">
+        <i class="fa fa-pencil-square-o"></i>
+        <h3>Week 1: Analisi Concettuale</h3>
+        <p style="text-align: left !important;">
+            <b>Elicitazione:</b> Brainstorming per tradurre la consegna in specifiche atomiche.<br>
+            <b>Product Backlog:</b> User Stories (Chi/Cosa/Perché) raffinate secondo criteri <b>INVEST</b>.<br>
+            <b>Design Model:</b> Blueprint architetturale tramite UML Use Case e Logical View.
+        </p>
+    </div>
+    <div class="ux-card">
+        <i class="fa fa-cogs"></i>
+        <h3>Week 2: Sprint 1 - Core Logic</h3>
+        <p style="text-align: left !important;">
+            <b>Sprint Goal:</b> Sviluppo rapido della logica di base per garantire copertura funzionale.<br>
+            <b>Pair Programming:</b> Pratica <b>Extreme Programming</b> per condivisione della conoscenza.<br>
+            <b>Milestone:</b> Rilascio del primo Incremento (Minimum Viable Product).
+        </p>
+    </div>
+</div>
+
+---
+
+<h2 class="ux-title">Fase Centrale: Evoluzione e Testing (W3-W4)</h2>
 
 <div class="important-box">
-<p style="margin: 0 !important; font-size: 22px !important; text-align: center !important; color: #000;">
-    Un percorso di 5 settimane incentrato sul parallelismo tattico, disaccoppiamento architetturale e pulizia del codice.
-</p>
+    <h3 style="margin:0">Week 3 & 4: Sprint 2 – Evoluzione</h3>
+    <p><b>Features:</b> Integrazione nuove funzionalità | <b>Bug Fixing:</b> Sanamento criticità emesse.<br>
+    <b>Daily Scrum:</b> Stand-up meeting quotidiani (15 min) per coordinamento costante.</p>
+</div>
+
+<div class="ux-grid" style="margin-top:15px">
+    <div class="ux-card" style="border-top-color: #d90429 !important;">
+        <i class="fa fa-flask" style="color: #d90429 !important;"></i>
+        <h3>Development Testing</h3>
+        <p>Unit & Component Testing automatizzati (Setup-Call-Assertion) sui singoli oggetti.</p>
+    </div>
+    <div class="ux-card" style="border-top-color: #d90429 !important;">
+        <i class="fa fa-shield" style="color: #d90429 !important;"></i>
+        <h3>System & User Testing</h3>
+        <p>Test Black-Box su scenari reali e Alpha Testing con utenti esterni per criticità lato utente.</p>
+    </div>
 </div>
 
 ---
 
-## Prima Settimana
-### Brainstorming & User Stories
+<h2 class="ux-title">Fase Conclusiva: Deploy e Sottomissione (W5)</h2>
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: center;">
-<div>
-<p>
-    Ci siamo incontrati per buttare giù le idee fondanti del progetto. Abbiamo scelto come ambientazione una <b>città medievale nel Giappone feudale</b>.
-</p>
-<p>
-    Una volta definite le caratteristiche fondamentali del gioco (gestione risorse, strutture operative, metriche di felicità/stabilità), abbiamo iniziato a scrivere, in maniera assistita con l'IA, le <b>User Stories</b> collegate alle nostre idee.
-</p>
-</div>
-<div>
-    <img src="https://images.unsplash.com/photo-1528164344705-4754268799af?auto=format&fit=crop&q=80&w=600" alt="Japan Temple" style="border-radius: 8px; border: 2px solid #8c1c13; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
-</div>
-</div>
-
----
-
-## Seconda - Quarta Settimana
-### Stesura Codice & Divisione Ruoli
-
-<p>
-    La maggior parte del tempo è stata impiegata a scrivere il codice dell'applicazione. Non avendo esperienze pregresse con strumenti grafici in Java (libGDX), la fase di setup iniziale e l'interfaccia grafica sono state assistite dall'IA per muovere rapidamente i primi passi.
-</p>
-
-<div class="important-box">
-<p style="margin: 0 !important; font-weight: bold; color: #000;">
-    Separazione Netta delle Responsabilità:
-</p>
-<ul style="color: #000;">
-    <li><b>UX / UI (Grafica e Interazione):</b> Gestita da Antonio e Luca.</li>
-    <li><b>Core Logic (Motore e Regole):</b> Gestita da Edoardo e Mario.</li>
-</ul>
+<div style="display: block; width: 100%;">
+    <div class="file-box">
+        <div class="file-name">Final Polish</div>
+        <p class="file-desc">Ispezione statica del codice e validazione formale rispetto agli Acceptance Criteria.</p>
+    </div>
+    <div class="file-box">
+        <div class="file-name">Host-Target Deploy</div>
+        <p class="file-desc">Risoluzione compatibilità tra ambiente di sviluppo (Host) e di esecuzione (Target).</p>
+    </div>
+    <div class="file-box">
+        <div class="file-name">Packaging</div>
+        <p class="file-desc">Generazione eseguibili, documentazione tecnica e stesura del file README.</p>
+    </div>
 </div>
 
-
----
-
-## Quinta Settimana
-### Quality Testing & Foolproofing
-
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: center;">
-<div>
-<p>
-    Abbiamo dedicato l'ultimo blocco di tempo a perfezionare e rifinire il progetto. 
-</p>
-<p>
-    Abbiamo fatto provare il simulatore a <b>persone esterne</b> al team per individuare criticità nascoste, bug di stabilità o passaggi d'interfaccia poco chiari. L'obiettivo è stato rendere il gioco il più <b>foolproof (a prova di errore)</b> possibile prima della consegna finale.
-</p>
-</div>
-<div>
-    <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&q=80&w=600" alt="Code Testing" style="border-radius: 8px; border: 2px solid #8c1c13; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
-</div>
+<div class="important-box" style="text-align: center; border-left: none; border-bottom: 4px solid #8C1C13;">
+    <h3 style="margin: 0 !important;">Sottomissione Finale: Deliverable completati</h3>
 </div>
 
 ---
 
-# User Stories e Jira
-### Definizione di Epic e User Stories
+<h2 class="ux-title">User Stories & Jira: Gli Epic</h2>
 
-Dopo aver definito l'ambientazione e le funzionalità principali della simulazione, abbiamo approfondito l'analisi dei requisiti.
-
-Le attività sono state suddivise in **6 Epic**, corrispondenti alle principali aree funzionali del progetto. Assumendo il ruolo di Product Owner, abbiamo designato le **User Stories** necessarie al raggiungimento degli obiettivi di sviluppo.
-
-Per ampliare e validare le idee iniziali, abbiamo utilizzato strumenti di Intelligenza Artificiale (LLM), ottenendo ulteriori proposte che sono state successivamente analizzate e consolidate in un insieme finale di **16 User Stories**, ciascuna associata all'Epic opportuna.
+<div class="ux-grid">
+    <div class="ux-card">
+        <i class="fa fa-list-ol"></i>
+        <h3>6 Epic Funzionali</h3>
+        <p>Suddivisione delle macro-aree del simulatore (Core Logic, Grafica, Interazione, Persistenza) per mappare lo sviluppo in blocchi atomici.</p>
+    </div>
+    <div class="ux-card">
+        <i class="fa fa-lightbulb-o"></i>
+        <h3>16 User Stories</h3>
+        <p>Elicitate e raffinate tramite LLM per validare le idee iniziali, consolidando i requisiti in base ai criteri INVEST.</p>
+    </div>
+</div>
 
 ---
 
-# User Stories e Jira
-### Struttura delle User Stories
+<h2 class="ux-title">Anatomia di una User Story</h2>
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: center;">
-
-<div>
-
-Ogni User Story include:
-• Descrizione funzionale
-• Acceptance Criteria
-• Note tecniche e implementative
-• Riferimenti alla documentazione di sviluppo (classi e test realizzati)
+<div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; align-items: center;">
+    <div>
+        <div class="file-box"><div class="file-name" style="min-width:180px">Descrizione</div><p class="file-desc">Definizione pattern: Chi, Cosa, Perché.</p></div>
+        <div class="file-box"><div class="file-name" style="min-width:180px">Acceptance Criteria</div><p class="file-desc">Vincoli per Definition of Done.</p></div>
+        <div class="file-box"><div class="file-name" style="min-width:180px">Note Tecniche</div><p class="file-desc">Riferimenti a classi e JUnit test.</p></div>
+    </div>
+    <div style="text-align: center;">
+        <img src="https://hackmd.io/_uploads/rJClpGwWGl.png" style="border: 2px solid #8C1C13; border-radius: 8px; max-height: 250px;">
+    </div>
 </div>
-    
-<div>
-    <img src="![Image US](https://hackmd.io/_uploads/rJClpGwWGl.png)
-" alt="Code Testing" style="border-radius: 8px; border: 2px solid #8c1c13; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
-</div>
-    
-</div>
-
 
 ---
 
-# User Stories e Jira
-### Gestione delle User Stories in Jira
+<h2 class="ux-title">Gestione Agile in Jira</h2>
 
-Le Epic contenenti le relative User Stories organizzate gerarchicamente, sono contenute nell'**elenco**, in *Jira*.
+<div class="important-box" style="border-left-color: #8C1C13 !important;">
+    <h3><i class="fa fa-folder-open-o"></i> Tracciamento Gerarchico</h3>
+    <p>Tutte le User Stories sono state organizzate nel Backlog di Jira, garantendo trasparenza sui carichi di lavoro del team.</p>
+</div>
 
-
-Seguendo un approccio **agile**, in seguito a meeting, attività di testing e verifiche periodiche, le User Stories sono state aggiornate e perfezionate, specialmente negli AC e nelle note tecniche e di implementazione, durante lo svolgersi del progetto.
+<div class="important-box" style="margin-top: 20px;">
+    <h3><i class="fa fa-refresh"></i> Raffinamento Continuo</h3>
+    <p>Seguendo un approccio empirico, AC e note sono stati aggiornati progressivamente a seguito dei Daily Scrum e dei test di usabilità.</p>
+</div>
 
 ---
 
 ## Stesura del Codice
 ### La Struttura dell'Applicazione
 
-<p style="text-align: center !important; color: #000;">
-    L'intera implementazione software di Daimyo Simulator è stata segmentata in tre macro-aree indipendenti e comunicanti:
-</p>
-
-<br>
-<div style="display: flex; gap: 20px; justify-content: space-between;">
-    <div style="background: rgba(0,0,0,0.05); padding: 20px; flex: 1; text-align: center; border-radius: 4px; border: 1px solid #ddd;">
-        <h3 style="color: #388e3c !important;">LOGICA</h3>
-        <p style="font-size: 18px !important; text-align: center !important; color: #000;">Motore matematico, tick e risorse.</p>
+<div style="display: flex; gap: 20px; justify-content: space-between; margin-top: 40px;">
+    <div class="ux-card" style="flex: 1;">
+        <h3 style="color:#8C1C13 !important">LOGICA</h3>
+        <p>Motore matematico, tick e risorse.</p>
     </div>
-    <div style="background: rgba(0,0,0,0.05); padding: 20px; flex: 1; text-align: center; border-radius: 4px; border: 1px solid #ddd;">
-        <h3 style="color: #1976d2 !important;">MOTORE GRAFICO</h3>
-        <p style="font-size: 18px !important; text-align: center !important; color: #000;">Rendering, Texture Atlas e Stage.</p>
+    <div class="ux-card" style="flex: 1;">
+        <h3 style="color:#8C1C13 !important">MOTORE GRAFICO</h3>
+        <p>Rendering, Texture Atlas e Stage.</p>
     </div>
-    <div style="background: rgba(0,0,0,0.05); padding: 20px; flex: 1; text-align: center; border-radius: 4px; border: 1px solid #ddd;">
-        <h3 style="color: #c2185b !important;">INTERAZIONE</h3>
-        <p style="font-size: 18px !important; text-align: center !important; color: #000;">Input router, comandi e pannelli UI.</p>
+    <div class="ux-card" style="flex: 1;">
+        <h3 style="color:#8C1C13 !important">INTERAZIONE</h3>
+        <p>Input router, comandi e pannelli UI.</p>
     </div>
 </div>
 
 ---
 
-## Logica del gioco
-### Architettura Generale del Backend
+<h2 class="gfx-title">Logica del gioco: Backend</h2>
 
 <div class="gfx-grid">
-    <div class="gfx-card" style="border-top-color: #3a86ff;">
-        <i class="fa fa-sitemap" style="color: #3a86ff;"></i>
+    <div class="gfx-card">
+        <i class="fa fa-sitemap"></i>
         <h3>Servizi Specializzati</h3>
-        <p>Separazione netta delle responsabilità tramite servizi (es. <span class="gfx-code">HousingService</span>, <span class="gfx-code">TradeService</span>, <span class="gfx-code">ConstructionService</span>).</p>
+        <p>Separazione responsabilità: <span class="gfx-code">HousingService</span>, <span class="gfx-code">TradeService</span>, <span class="gfx-code">ConstructionService</span>.</p>
     </div>
-    <div class="gfx-card" style="border-top-color: #fca311;">
-        <i class="fa fa-gamepad" style="color: #fca311;"></i>
+    <div class="gfx-card">
+        <i class="fa fa-gamepad"></i>
         <h3>Orchestrazione</h3>
-        <p>Il <span class="gfx-code">GameController</span> funge da punto d'accesso principale, gestendo le richieste del giocatore in modo sicuro.</p>
+        <p>Il <span class="gfx-code">GameController</span> funge da punto d'accesso principale per le richieste della UI.</p>
     </div>
-    <div class="gfx-card" style="border-top-color: #38b000;">
-        <i class="fa fa-clock-o" style="color: #38b000;"></i>
+    <div class="gfx-card">
+        <i class="fa fa-clock-o"></i>
         <h3>Motore Tick-Based</h3>
-        <p>Il <span class="gfx-code">SimulationEngine</span> scandisce il progresso, mantenendo coerenza temporale ed economica.</p>
+        <p>Il <span class="gfx-code">SimulationEngine</span> mantiene coerenza temporale ed economica.</p>
     </div>
-    <div class="gfx-card" style="border-top-color: #d90429;">
-        <i class="fa fa-shield" style="color: #d90429;"></i>
+    <div class="gfx-card">
+        <i class="fa fa-shield"></i>
         <h3>Dominio Sicuro</h3>
-        <p>Il backend non espone le entità interne: comunica con la UI tramite proiezioni di dati immutabili (<span class="gfx-code">Snapshot</span>).</p>
+        <p>Backend isolato: comunica con la UI tramite proiezioni immutabili (<span class="gfx-code">Snapshot</span>).</p>
     </div>
 </div>
 
 ---
 
-## Logica del gioco
-### TickProcessor
-
-<p style="text-align: center !important;">È la classe centrale che ricalcola l'intero stato del villaggio ad ogni singolo turno (tick) attraverso fasi sequenziali.</p>
+<h2 class="gfx-title">TickProcessor</h2>
+<p style="text-align: center; margin-bottom: 10px;">Classe centrale che ricalcola lo stato ad ogni turno.</p>
 
 <div class="gfx-flow">
-    <div class="gfx-step" style="border-top-color:#8c1c13;">
-        <i class="fa fa-gavel"></i>
-        <h3>1. Policy & Eventi</h3>
-        <p>Esecuzione regole villaggio</p>
-    </div>
+    <div class="gfx-step"><i class="fa fa-gavel"></i><h3>1. Policy</h3><p>Regole villaggio</p></div>
     <div class="gfx-arrow">➔</div>
-    <div class="gfx-step" style="border-top-color:#fca311;">
-        <i class="fa fa-users"></i>
-        <h3>2. Lavoro</h3>
-        <p>Job Assignment dinamico</p>
-    </div>
+    <div class="gfx-step"><i class="fa fa-users"></i><h3>2. Lavoro</h3><p>Job Assignment</p></div>
     <div class="gfx-arrow">➔</div>
-    <div class="gfx-step" style="border-top-color:#3a86ff;">
-        <i class="fa fa-balance-scale"></i>
-        <h3>3. Economia</h3>
-        <p>Produzione e Consumo</p>
-    </div>
+    <div class="gfx-step"><i class="fa fa-balance-scale"></i><h3>3. Economia</h3><p>Produzione</p></div>
     <div class="gfx-arrow">➔</div>
-    <div class="gfx-step" style="border-top-color:#38b000;">
-        <i class="fa fa-heartbeat"></i>
-        <h3>4. Demografia</h3>
-        <p>Aggiornamenti e Felicità</p>
-    </div>
+    <div class="gfx-step"><i class="fa fa-heartbeat"></i><h3>4. Felicità</h3><p>Parametri</p></div>
 </div>
 
 <div class="gfx-highlight">
-    <p><b>Output:</b> Genera un <span class="gfx-code">TickResult</span> (Snapshot), fornendo uno storico accurato degli eventi da mostrare all'utente (inclusa la gestione carenze, es. diserzione samurai senza beni di lusso).</p>
+    <p><b>Output:</b> Genera un <span class="gfx-code">TickResult</span> (storico eventi e carenze, es. diserzione samurai).</p>
 </div>
 
 ---
 
-## Logica del gioco
-### Gestione degli Edifici
+<h2 class="gfx-title">Gestione degli Edifici</h2>
 
 <div class="ux-grid">
-    <div class="ux-card" style="border-top-color: #3a86ff;">
-        <i class="fa fa-building-o" style="color: #3a86ff;"></i>
-        <h3 style="color: #000 !important;">Gerarchia Edifici</h3>
-        <p style="font-size: 19px !important;">Tutti gli edifici estendono <span class="gfx-code">AbstractBuilding</span>, che standardizza costi in legname, capacità abitativa e "slot" di lavoro per i cittadini.</p>
+    <div class="ux-card">
+        <i class="fa fa-building-o"></i>
+        <h3>Gerarchia Edifici</h3>
+        <p>Tutti gli edifici estendono <span class="gfx-code">AbstractBuilding</span>: costi legname, residenti e slot lavoro standardizzati.</p>
     </div>
-    <div class="ux-card" style="border-top-color: #38b000;">
-        <i class="fa fa-map-marker" style="color: #38b000;"></i>
-        <h3 style="color: #000 !important;">Posizionamento</h3>
-        <p style="font-size: 19px !important;">Regole stringenti e reattive al contesto ambientale.</p>
+    <div class="ux-card">
+        <i class="fa fa-map-marker"></i>
+        <h3>Posizionamento</h3>
+        <p>Regole stringenti: piazzamento possibile solo se i requisiti ambientali sono soddisfatti (es. vicinanza foreste).</p>
     </div>
 </div>
 
 ---
 
-## Logica del gioco
-### Gestione delle Risorse
+<h2 class="gfx-title">Gestione delle Risorse</h2>
 
-<div class="ux-card" style="border-top-color: #d90429; margin-top: 15px; padding: 15px;">
-    <i class="fa fa-balance-scale" style="color: #d90429; font-size: 32px; margin-bottom: 8px;"></i>
-    <ul style="color: #000; text-align: left; display: inline-block; margin-bottom: 0; padding-left: 20px;">
-        <li style="font-size: 19px !important; line-height: 1.3 !important; margin-bottom: 8px;">Incremento continuo del costo degli edifici.</li>
-        <li style="font-size: 19px !important; line-height: 1.3 !important;"><b>Feedback punitivi attivi:</b> le carenze prolungate di risorse impattano direttamente i parametri del villaggio (es. abbandono o diserzione dei cittadini).</li>
+<div class="important-box">
+    <i class="fa fa-balance-scale" style="color:#8C1C13; font-size: 24px;"></i>
+    <ul style="margin:0; padding-left: 20px;">
+        <li><b>Costi Scalabili:</b> Incremento continuo del costo degli edifici all'aumentare delle unità.</li>
+        <li><b>Feedback Punitivi:</b> Carenze prolungate impattano i parametri (abbandono dei cittadini).</li>
     </ul>
 </div>
 
 ---
 
-## Logica del gioco
-### Design patterns utilizzati
+<h2 class="gfx-title">Design Patterns Utilizzati</h2>
 
-<div class="file-box border-blue">
-    <div class="file-name bg-blue" style="min-width: 330px; text-align: center;">Facade Pattern</div>
-    <p class="file-desc">Il <span class="gfx-code">GameController</span> nasconde l'interazione dei servizi sottostanti, offrendo metodi semplici alla vista (es. <span class="gfx-code">advanceTick()</span>).</p>
+<div class="file-box">
+    <div class="file-name">Facade Pattern</div>
+    <p class="file-desc"><span class="gfx-code">GameController</span> nasconde la complessità dei servizi interni.</p>
 </div>
-
-<div class="file-box border-green">
-    <div class="file-name bg-green" style="min-width: 330px; text-align: center;">Factory Pattern</div>
-    <p class="file-desc">La <span class="gfx-code">BuildingFactory</span> astrae e centralizza la creazione degli edifici (capanna, fattoria, ecc.), facilitando l'aggiunta di nuove strutture.</p>
+<div class="file-box">
+    <div class="file-name">Factory Pattern</div>
+    <p class="file-desc"><span class="gfx-code">BuildingFactory</span> centralizza e astrae la creazione di strutture.</p>
 </div>
-
-<div class="file-box border-red">
-    <div class="file-name bg-red" style="min-width: 330px; text-align: center;">Composite Pattern</div>
-    <p class="file-desc">Il <span class="gfx-code">CompositePlacementValidator</span> permette di unire dinamicamente molteplici regole per validare dove si può costruire un edificio.</p>
+<div class="file-box">
+    <div class="file-name">Composite Pattern</div>
+    <p class="file-desc"><span class="gfx-code">CompositePlacementValidator</span> unisce dinamicamente molteplici regole.</p>
 </div>
 
 ---
 
-## Architettura & Motore Grafico
-### Dal modello di gioco ai pixel su schermo
-
-<h2 class="gfx-title">Perché libGDX?</h2>
-<p class="gfx-subtitle">Serve un motore da gioco: rendering continuo, asset stratificati e controllo frame-by-frame.</p>
+<h2 class="gfx-title">Motore Grafico: Perché libGDX?</h2>
 
 <div class="gfx-grid">
-    <div class="gfx-card" style="border-top-color: #3a86ff;">
-        <i class="fa fa-refresh" style="color: #3a86ff;"></i>
-        <h3>Game Loop Reattivo</h3>
-        <p><span class="gfx-code">render(delta)</span> aggiorna la scena a ogni frame, mantenendo fluida la simulazione.</p>
+    <div class="gfx-card">
+        <i class="fa fa-refresh"></i>
+        <h3>Game Loop</h3>
+        <p><span class="gfx-code">render(delta)</span> aggiorna e disegna a 60 FPS per una fluidità totale.</p>
     </div>
-    <div class="gfx-card" style="border-top-color: #38b000;">
-        <i class="fa fa-picture-o" style="color: #38b000;"></i>
+    <div class="gfx-card">
+        <i class="fa fa-picture-o"></i>
         <h3>SpriteBatch</h3>
-        <p>Disegna tile, edifici e overlay in modo efficiente, senza appesantire il motore grafico.</p>
-    </div>
-    <div class="gfx-card" style="border-top-color: #d90429;">
-        <i class="fa fa-video-camera" style="color: #d90429;"></i>
-        <h3>Camera Ortografica</h3>
-        <p>Pan, zoom controllato e griglia pixel-perfect rendono la mappa stabile e leggibile.</p>
-    </div>
-    <div class="gfx-card" style="border-top-color: #9d4edd;">
-        <i class="fa fa-object-group" style="color: #9d4edd;"></i>
-        <h3>Scene2D per la UI</h3>
-        <p><span class="gfx-code">Stage</span> e <span class="gfx-code">Table</span> gestiscono HUD, Build Menu e pannelli senza coordinate manuali.</p>
+        <p>Disegno efficiente di migliaia di tile e asset senza sovraccaricare la GPU.</p>
     </div>
 </div>
 
 <div class="gfx-mini-note">
-    <p class="gfx-mini-title">Perché non JavaFX o Swing?</p>
-    <p>Sono ottimi per applicazioni a widget, ma meno adatti a un gioco 2D: libGDX offre game loop, batching sprite e pipeline OpenGL per rendering continuo.</p>
+    <p class="gfx-mini-title">vs Swing/JavaFX</p>
+    <p>libGDX offre controllo diretto su OpenGL, batching nativo e pipeline specifiche per il rendering 2D continuo.</p>
 </div>
 
 ---
 
-## Architettura & Motore Grafico
-### Pipeline asset
-
-<h2 class="gfx-title">Dall'asset PNG al Render Model</h2>
-<p class="gfx-subtitle">Prima trasformiamo i file grafici in riferimenti stabili, poi li esponiamo al resto del gioco.</p>
+<h2 class="gfx-title">Pipeline Asset</h2>
 
 <div class="gfx-flow">
-    <div class="gfx-step">
-        <i class="fa fa-file-image-o"></i>
-        <h3>PNG</h3>
-        <p>Tile, edifici, icone e feature.</p>
-    </div>
+    <div class="gfx-step"><i class="fa fa-file-image-o"></i><h3>PNG</h3></div>
     <div class="gfx-arrow">➔</div>
-    <div class="gfx-step">
-        <i class="fa fa-database"></i>
-        <h3>Registry</h3>
-        <p>Chiavi asset e fallback.</p>
-    </div>
+    <div class="gfx-step"><i class="fa fa-database"></i><h3>Registry</h3></div>
     <div class="gfx-arrow">➔</div>
-    <div class="gfx-step">
-        <i class="fa fa-th-large"></i>
-        <h3>Render Model</h3>
-        <p>Ogni cella diventa disegnabile.</p>
-    </div>
+    <div class="gfx-step"><i class="fa fa-th-large"></i><h3>Model</h3></div>
     <div class="gfx-arrow">➔</div>
-    <div class="gfx-step">
-        <i class="fa fa-magic"></i>
-        <h3>WorldRenderer</h3>
-        <p>La scena viene composta.</p>
-    </div>
+    <div class="gfx-step"><i class="fa fa-magic"></i><h3>Renderer</h3></div>
 </div>
 
-<div class="gfx-file-box" style="border-left-color: #38b000;">
-    <div class="gfx-file-name" style="background: #38b000;">GameAssetManager</div>
-    <p class="gfx-file-desc">Espone gli asset al resto del gioco e gestisce il <span class="gfx-code">missing_asset</span>, evitando blocchi anche se manca una texture.</p>
-</div>
-
-<div class="gfx-highlight">
-    <p><b>Obiettivo:</b> rendere gli asset intercambiabili: cambiare un PNG non deve cambiare la logica del simulatore.</p>
+<div class="file-box">
+    <div class="file-name">GameAssetManager</div>
+    <p class="file-desc">Gestisce il <span class="gfx-code">missing_asset</span> evitando crash se manca una texture.</p>
 </div>
 
 ---
 
-## Architettura & Motore Grafico
-### Rendering della mappa
-
-<h2 class="gfx-title">Ordine visivo e registri grafici</h2>
-<p class="gfx-subtitle">Il renderer non disegna “tutto insieme”: compone la scena in livelli per mantenere leggibilità e coerenza.</p>
+<h2 class="gfx-title">Rendering della Mappa</h2>
 
 <div class="gfx-grid">
-    <div class="gfx-card" style="border-top-color: #fca311; text-align: left;">
-        <h3 style="text-align: center;">Ordine di rendering</h3>
-        <div class="gfx-layer-stack">
-            <div class="gfx-layer">1. Terreno base</div>
-            <div class="gfx-layer" style="border-left-color:#38b000;">2. Bordi di foresta</div>
-            <div class="gfx-layer" style="border-left-color:#fca311;">3. Feature naturali</div>
-            <div class="gfx-layer" style="border-left-color:#d90429;">4. Edifici e anteprima costruzione</div>
-            <div class="gfx-layer" style="border-left-color:#9d4edd;">5. Animazioni e griglia di selezione</div>
-        </div>
+    <div class="gfx-card" style="text-align: left;">
+        <h3 style="text-align:center">Livelli di Disegno</h3>
+        <div class="gfx-layer">1. Terreno base</div>
+        <div class="gfx-layer">2. Bordi di foresta</div>
+        <div class="gfx-layer">3. Feature naturali</div>
+        <div class="gfx-layer">4. Edifici e anteprime</div>
+        <div class="gfx-layer">5. Animazioni e griglia</div>
     </div>
-    <div>
-        <div class="gfx-card" style="border-top-color: #3a86ff;">
-            <i class="fa fa-map-o" style="color:#3a86ff;"></i>
-            <h3>WorldRenderer</h3>
-            <p>Prende il modello grafico della mappa e lo trasforma in una scena 2D ordinata, leggibile e navigabile.</p>
-        </div>
+    <div class="gfx-card">
+        <i class="fa fa-video-camera"></i>
+        <h3>OrthographicCamera</h3>
+        <p>Gestisce pan, zoom pixel-perfect e stabilità visiva del feudo.</p>
     </div>
-</div>
-
-<div class="gfx-highlight">
-    <p><b>Vantaggio pratico:</b> anteprime, animazioni e selezione sono livelli separati, quindi possono cambiare senza riscrivere il disegno del terreno.</p>
 </div>
 
 ---
 
-## Architettura & Motore Grafico
-### Disaccoppiamento tra logica e rendering
-
-<h2 class="gfx-title">Contratto stabile: Snapshot ➔ Adapter ➔ Renderer</h2>
-<p class="gfx-subtitle">La logica calcola il villaggio; la grafica riceve solo ciò che deve disegnare.</p>
+<h2 class="gfx-title">Disaccoppiamento</h2>
 
 <div class="gfx-flow">
-    <div class="gfx-step" style="border-top-color:#8c1c13;">
-        <i class="fa fa-cogs" style="color:#8c1c13;"></i>
-        <h3>Core Logic</h3>
-        <p>Regole, risorse e tick.</p>
-    </div>
+    <div class="gfx-step"><h3>Logica</h3><p>Calcolo regole</p></div>
     <div class="gfx-arrow">➔</div>
-    <div class="gfx-step" style="border-top-color:#fca311;">
-        <i class="fa fa-camera-retro" style="color:#fca311;"></i>
-        <h3>VillageSnapshot</h3>
-        <p>Fotografia immutabile.</p>
-    </div>
+    <div class="gfx-step"><h3>Snapshot</h3><p>Dati immutabili</p></div>
     <div class="gfx-arrow">➔</div>
-    <div class="gfx-step" style="border-top-color:#3a86ff;">
-        <i class="fa fa-exchange" style="color:#3a86ff;"></i>
-        <h3>Adapter</h3>
-        <p>Traduce dominio in grafica.</p>
-    </div>
-    <div class="gfx-arrow">➔</div>
-    <div class="gfx-step" style="border-top-color:#38b000;">
-        <i class="fa fa-desktop" style="color:#38b000;"></i>
-        <h3>WorldRenderer</h3>
-        <p>Disegna senza modificare il modello.</p>
-    </div>
-</div>
-
-<div class="gfx-grid">
-    <div class="gfx-card" style="border-top-color: #14213d;">
-        <i class="fa fa-sitemap"></i>
-        <h3>Model-View-Presenter</h3>
-        <p>Abbiamo adottato il pattern MVP: il Model contiene stato e regole, la View gestisce ciò che viene mostrato e il Presenter coordina input e snapshot senza accoppiare logica e grafica.</p>
-    </div>
-    <div class="gfx-card" style="border-top-color: #fca311;">
-        <i class="fa fa-shield" style="color: #fca311;"></i>
-        <h3>Renderer sicuro</h3>
-        <p>Il renderer non conosce le regole di gioco: legge dati pronti e li trasforma in immagini.</p>
-    </div>
+    <div class="gfx-step"><h3>Renderer</h3><p>Disegno puro</p></div>
 </div>
 
 <div class="gfx-highlight">
-    <p><b>Risultato:</b> il modello può evolvere senza rompere la UI, e la UI può migliorare senza toccare le formule del simulatore.</p>
+    <p>Logica e Grafica lavorano in parallelo su un contratto stabile: il renderer non modifica mai il modello di gioco.</p>
 </div>
 
 ---
 
-# Interazione Utente & UI Layout
-
-
-<h2 class="ux-title">Cos'è la UX nel nostro simulatore?</h2>
+<h2 class="ux-title">Cos'è la UX nel simulatore?</h2>
 
 <div class="ux-grid">
-    <div class="ux-card" style="border-top-color: #3a86ff;">
-        <i class="fa fa-mouse-pointer" style="color: #3a86ff;"></i>
-        <h3 style="color: #000000 !important;">Interazione Fluida</h3>
-        <p style="text-align: center; font-size: 20px !important; color: #000000 !important;">Select & Drag, navigazione mappa (Pan/Zoom) e interazione coerente coi bottoni senza conflitti.</p>
+    <div class="ux-card">
+        <i class="fa fa-mouse-pointer"></i>
+        <h3>Interazione Fluida</h3>
+        <p>Select & Drag, navigazione mappa (Pan/Zoom) e bottoni coerenti senza conflitti di input.</p>
     </div>
-    <div class="ux-card" style="border-top-color: #38b000;">
-        <i class="fa fa-eye" style="color: #38b000;"></i>
-        <h3 style="color: #000000 !important;">Visibilità Contestuale</h3>
-        <p style="text-align: center; font-size: 20px !important; color: #000000 !important;">HUD organizzato a cornice. I menù e i dettagli (es. Market) appaiono solo quando selezioni una struttura.</p>
+    <div class="ux-card">
+        <i class="fa fa-eye"></i>
+        <h3>Visibilità Contestuale</h3>
+        <p>HUD a cornice. Pannelli e dettagli (es. Market) appaiono solo se richiesti dalla selezione.</p>
     </div>
-    <div class="ux-card" style="border-top-color: #d90429;">
-        <i class="fa fa-bell" style="color: #d90429;"></i>
-        <h3 style="color: #000000 !important;">Alert Significativi</h3>
-        <p style="text-align: center; font-size: 20px !important; color: #000000 !important;">Pop-up cromatici (verde/rosso) e First-Time Warnings per educare il giocatore senza fare spam.</p>
+    <div class="ux-card">
+        <i class="fa fa-bell"></i>
+        <h3>Alert Significativi</h3>
+        <p>Pop-up cromatici (verde/rosso) e First-Time Warnings per educare senza fare spam.</p>
     </div>
-    <div class="ux-card" style="border-top-color: #9d4edd;">
-        <i class="fa fa-sliders" style="color: #9d4edd;"></i>
-        <h3 style="color: #000000 !important;">Controllo Utente</h3>
-        <p style="text-align: center; font-size: 20px !important; color: #000000 !important;">Menù Impostazioni facilmente accessibile, controllo velocità logica e opzioni di salvataggio veloci.</p>
+    <div class="ux-card">
+        <i class="fa fa-sliders"></i>
+        <h3>Controllo Utente</h3>
+        <p>Menù impostazioni accessibile, controllo velocità logica e slot di salvataggio rapidi.</p>
     </div>
 </div>
 
@@ -856,77 +537,58 @@ Seguendo un approccio **agile**, in seguito a meeting, attività di testing e ve
 
 <h2 class="ux-title">I File dell'Interazione</h2>
 
-<div class="file-box border-blue">
-    <div class="file-name bg-blue">GameInputProcessor</div>
-    <p class="file-desc" style="color: #000000 !important;">Ascolta i click "grezzi". Ignora le azioni fuori dalla griglia e impedisce conflitti se l'utente sta cliccando sull'HUD.</p>
+<div class="file-box">
+    <div class="file-name">GameInputProcessor</div>
+    <p class="file-desc">Filtra click e movimenti. Ignora azioni fuori griglia e priorità all'HUD.</p>
 </div>
-
-<div class="file-box border-blue">
-    <div class="file-name bg-blue">CameraController</div>
-    <p class="file-desc" style="color: #000000 !important;">Gestisce l'esplorazione: permette il "Select and Drag", il pan (WASD) e blocca lo zoom per non rompere la prospettiva.</p>
+<div class="file-box">
+    <div class="file-name">CameraController</div>
+    <p class="file-desc">Gestisce l'esplorazione (WASD/Frecce) e blocca lo zoom per la prospettiva.</p>
 </div>
-
-<div class="file-box border-blue">
-    <div class="file-name bg-blue">BuildModeState</div>
-    <p class="file-desc" style="color: #000000 !important;">La memoria a breve termine della UX: ricorda se stai solo esplorando, se hai in mano un edificio o il martello da demolizione.</p>
+<div class="file-box">
+    <div class="file-name">BuildModeState</div>
+    <p class="file-desc">Ricorda se l'utente sta esplorando, piazzando edifici o demolendo.</p>
 </div>
-
-<div class="file-box border-blue">
-    <div class="file-name bg-blue">InputCommandRouter</div>
-    <p class="file-desc" style="color: #000000 !important;">Lo "smistatore". Prende il click convertito e decide: ispeziono la cella? Piazzo l'edificio? O cancello tutto?</p>
+<div class="file-box">
+    <div class="file-name">InputCommandRouter</div>
+    <p class="file-desc">Lo "smistatore": traduce il click in ispezione cella o azione di costruzione.</p>
 </div>
 
 ---
 
 <h2 class="ux-title">I File dell'Interfaccia</h2>
 
-<div class="file-box border-green">
-    <div class="file-name bg-green">DashboardHud</div>
-    <p class="file-desc" style="color: #000000 !important;">La cornice madre. Racchiude BuildMenu, Risorse e parametri ai bordi, lasciando il centro dello schermo libero per giocare.</p>
+<div class="file-box">
+    <div class="file-name">DashboardHud</div>
+    <p class="file-desc">Cornice madre: racchiude BuildMenu, Risorse e parametri ai bordi dello schermo.</p>
 </div>
-
-<div class="file-box border-red">
-    <div class="file-name bg-red">WarningPanel & EventModal</div>
-    <p class="file-desc" style="color: #000000 !important;">Gestiscono i First-Time Warnings (es. quando finisce il cibo) e mostrano gli eventi casuali sfruttando la psicologia dei colori.</p>
+<div class="file-box">
+    <div class="file-name">WarningPanel & Modal</div>
+    <p class="file-desc">Gestiscono i First-Time Warnings e mostrano eventi casuali con psicologia dei colori.</p>
 </div>
-
-<div class="file-box border-green">
-    <div class="file-name bg-green">SelectedBuildingPanel</div>
-    <p class="file-desc" style="color: #000000 !important;">UX contestuale: appare in basso solo quando ispezioni un edificio. Nasconde la complessità finché non la richiedi (es. tasto Trade).</p>
-</div>
-
-<div class="file-box border-green">
-    <div class="file-name bg-green">SettingsModal / Dialogs</div>
-    <p class="file-desc" style="color: #000000 !important;">Modali in sovraimpressione per mettere in pausa e dare controllo su Salvataggi, Tutorial e regolazione Audio asincrona.</p>
+<div class="file-box">
+    <div class="file-name">SelectedBuildingPanel</div>
+    <p class="file-desc">UX contestuale: appare in basso solo quando ispezioni un edificio specifico.</p>
 </div>
 
 ---
 
-<h2 class="ux-title">Persistenza: JSON & Memento Pattern</h2>
+<h2 class="ux-title">Persistenza: JSON & Memento</h2>
+
 <div class="ux-grid">
-    <div class="ux-card" style="border-top-color: #fca311;">
-        <i class="fa fa-floppy-o" style="color: #fca311;"></i>
-        <h3 style="color: #000000 !important;">Memento Pattern</h3>
-        <p style="text-align: center; font-size: 20px !important; color: #000000 !important;">Catturiamo uno "snapshot" istantaneo di tutte le variabili (risorse, edifici, cittadini) senza violare l'incapsulamento.</p>
+    <div class="ux-card">
+        <i class="fa fa-floppy-o"></i>
+        <h3>Memento Pattern</h3>
+        <p>Catturiamo uno "snapshot" di risorse, edifici e cittadini senza violare l'incapsulamento.</p>
     </div>
-    <div class="ux-card" style="border-top-color: #fca311;">
-        <i class="fa fa-file-code-o" style="color: #fca311;"></i>
-        <h3 style="color: #000000 !important;">Formato JSON</h3>
-        <p style="text-align: center; font-size: 20px !important; color: #000000 !important;">Semplice, leggero e leggibile. Permette di debuggare i salvataggi aprendoli come semplici file di testo.</p>
+    <div class="ux-card">
+        <i class="fa fa-file-code-o"></i>
+        <h3>Formato JSON</h3>
+        <p>Leggero e leggibile. Permette di debuggare i salvataggi come semplici file di testo.</p>
     </div>
 </div>
 
-<div class="file-box" style="border-left-color: #fca311 !important; margin-top: 30px;">
-    <div class="file-name" style="background: #fca311 !important; color: #000 !important;">VillagePersistenceService</div>
-    <p class="file-desc" style="color: #000000 !important;">L'orchestratore: gestisce i 5 slot di salvataggio nella cartella utente e coordina l'apertura/chiusura dei file su disco.</p>
-</div>
-
-<div class="file-box" style="border-left-color: #fca311 !important;">
-    <div class="file-name" style="background: #fca311 !important; color: #000 !important;">VillageMapper</div>
-    <p class="file-desc" style="color: #000000 !important;">Il traduttore: trasforma l'oggetto Java <code>Village</code> in una stringa JSON e viceversa, gestendo anche le versioni del salvataggio.</p>
-</div>
-
-<div class="file-box" style="border-left-color: #fca311 !important;">
-    <div class="file-name" style="background: #fca311 !important; color: #000 !important;">GamePersistenceManager</div>
-    <p class="file-desc" style="color: #000000 !important;">Il ponte con la UI: permette ai pulsanti "Save" e "Load" del menù di dialogare con il sistema di scrittura senza bloccare il rendering.</p>
+<div class="file-box" style="margin-top:20px">
+    <div class="file-name">VillagePersistenceService</div>
+    <p class="file-desc">Gestisce i 5 slot di salvataggio nella cartella utente (<span class="gfx-code">.daimyosimulator</span>).</p>
 </div>
