@@ -546,17 +546,118 @@ Seguendo un approccio **agile**, in seguito a meeting, attività di testing e ve
 
 ---
 
-## Struttura della Logica di Gioco
-### Il Modulo Core del Simulatore
+## Logica del gioco
+### Architettura Generale del Backend
 
-<div class="todo-box">
-    <div class="todo-title">SLIDE DA COMPLETARE — REQUISITO PER: EDOARDO PERISSINOTTO</div>
-    <p><b>Indicazioni per lo sviluppo della slide:</b></p>
-    <ul>
-        <li>Spiegare la struttura del backend logico (modulo daimyosimulator-core).</li>
-        <li>Approfondire il funzionamento del motore a tick discreti e la gestione delle strutture dati delle risorse.</li>
-        <li>Esporre le formule matematiche e le regole di bilanciamento (es. i rapporti per Sicurezza, Cultura, Craftsmanship, e i malus legati allo stock zero di Tools o Luxury).</li>
+<div class="gfx-grid">
+    <div class="gfx-card" style="border-top-color: #3a86ff;">
+        <i class="fa fa-sitemap" style="color: #3a86ff;"></i>
+        <h3>Servizi Specializzati</h3>
+        <p>Separazione netta delle responsabilità tramite servizi (es. <span class="gfx-code">HousingService</span>, <span class="gfx-code">TradeService</span>, <span class="gfx-code">ConstructionService</span>).</p>
+    </div>
+    <div class="gfx-card" style="border-top-color: #fca311;">
+        <i class="fa fa-gamepad" style="color: #fca311;"></i>
+        <h3>Orchestrazione</h3>
+        <p>Il <span class="gfx-code">GameController</span> funge da punto d'accesso principale, gestendo le richieste del giocatore in modo sicuro.</p>
+    </div>
+    <div class="gfx-card" style="border-top-color: #38b000;">
+        <i class="fa fa-clock-o" style="color: #38b000;"></i>
+        <h3>Motore Tick-Based</h3>
+        <p>Il <span class="gfx-code">SimulationEngine</span> scandisce il progresso, mantenendo coerenza temporale ed economica.</p>
+    </div>
+    <div class="gfx-card" style="border-top-color: #d90429;">
+        <i class="fa fa-shield" style="color: #d90429;"></i>
+        <h3>Dominio Sicuro</h3>
+        <p>Il backend non espone le entità interne: comunica con la UI tramite proiezioni di dati immutabili (<span class="gfx-code">Snapshot</span>).</p>
+    </div>
+</div>
+
+---
+
+## Logica del gioco
+### TickProcessor
+
+<p style="text-align: center !important;">È la classe centrale che ricalcola l'intero stato del villaggio ad ogni singolo turno (tick) attraverso fasi sequenziali.</p>
+
+<div class="gfx-flow">
+    <div class="gfx-step" style="border-top-color:#8c1c13;">
+        <i class="fa fa-gavel"></i>
+        <h3>1. Policy & Eventi</h3>
+        <p>Esecuzione regole villaggio</p>
+    </div>
+    <div class="gfx-arrow">➔</div>
+    <div class="gfx-step" style="border-top-color:#fca311;">
+        <i class="fa fa-users"></i>
+        <h3>2. Lavoro</h3>
+        <p>Job Assignment dinamico</p>
+    </div>
+    <div class="gfx-arrow">➔</div>
+    <div class="gfx-step" style="border-top-color:#3a86ff;">
+        <i class="fa fa-balance-scale"></i>
+        <h3>3. Economia</h3>
+        <p>Produzione e Consumo</p>
+    </div>
+    <div class="gfx-arrow">➔</div>
+    <div class="gfx-step" style="border-top-color:#38b000;">
+        <i class="fa fa-heartbeat"></i>
+        <h3>4. Demografia</h3>
+        <p>Aggiornamenti e Felicità</p>
+    </div>
+</div>
+
+<div class="gfx-highlight">
+    <p><b>Output:</b> Genera un <span class="gfx-code">TickResult</span> (Snapshot), fornendo uno storico accurato degli eventi da mostrare all'utente (inclusa la gestione carenze, es. diserzione samurai senza beni di lusso).</p>
+</div>
+
+---
+
+## Logica del gioco
+### Gestione degli Edifici
+
+<div class="ux-grid">
+    <div class="ux-card" style="border-top-color: #3a86ff;">
+        <i class="fa fa-building-o" style="color: #3a86ff;"></i>
+        <h3 style="color: #000 !important;">Gerarchia Edifici</h3>
+        <p style="font-size: 19px !important;">Tutti gli edifici estendono <span class="gfx-code">AbstractBuilding</span>, che standardizza costi in legname, capacità abitativa e "slot" di lavoro per i cittadini.</p>
+    </div>
+    <div class="ux-card" style="border-top-color: #38b000;">
+        <i class="fa fa-map-marker" style="color: #38b000;"></i>
+        <h3 style="color: #000 !important;">Posizionamento</h3>
+        <p style="font-size: 19px !important;">Regole stringenti e reattive al contesto ambientale.</p>
+    </div>
+</div>
+
+---
+
+## Logica del gioco
+### Gestione delle Risorse
+
+<div class="ux-card" style="border-top-color: #d90429; margin-top: 15px; padding: 15px;">
+    <i class="fa fa-balance-scale" style="color: #d90429; font-size: 32px; margin-bottom: 8px;"></i>
+    <ul style="color: #000; text-align: left; display: inline-block; margin-bottom: 0; padding-left: 20px;">
+        <li style="font-size: 19px !important; line-height: 1.3 !important; margin-bottom: 8px;">Incremento continuo del costo degli edifici.</li>
+        <li style="font-size: 19px !important; line-height: 1.3 !important;"><b>Feedback punitivi attivi:</b> le carenze prolungate di risorse impattano direttamente i parametri del villaggio (es. abbandono o diserzione dei cittadini).</li>
     </ul>
+</div>
+
+---
+
+## Logica del gioco
+### Design patterns utilizzati
+
+<div class="file-box border-blue">
+    <div class="file-name bg-blue" style="min-width: 330px; text-align: center;">Facade Pattern</div>
+    <p class="file-desc">Il <span class="gfx-code">GameController</span> nasconde l'interazione dei servizi sottostanti, offrendo metodi semplici alla vista (es. <span class="gfx-code">advanceTick()</span>).</p>
+</div>
+
+<div class="file-box border-green">
+    <div class="file-name bg-green" style="min-width: 330px; text-align: center;">Factory Pattern</div>
+    <p class="file-desc">La <span class="gfx-code">BuildingFactory</span> astrae e centralizza la creazione degli edifici (capanna, fattoria, ecc.), facilitando l'aggiunta di nuove strutture.</p>
+</div>
+
+<div class="file-box border-red">
+    <div class="file-name bg-red" style="min-width: 330px; text-align: center;">Composite Pattern</div>
+    <p class="file-desc">Il <span class="gfx-code">CompositePlacementValidator</span> permette di unire dinamicamente molteplici regole per validare dove si può costruire un edificio.</p>
 </div>
 
 ---
